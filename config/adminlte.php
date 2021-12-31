@@ -249,70 +249,75 @@ return [
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+    //        'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'text' => 'Usuario',
+            'url'  => 'users',
+            'icon' => 'fas fa-fw fa-user',
         ],
+        [
+            'text' => 'Nutricionista',
+            'url'  => 'nutricionistas',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+  /*      [
+            'text' => 'Roles',
+            'url'  => 'roles',
+            'icon' => 'fas fa-fw fa-user',
+        ],*/
+        [
+            'text' => 'tipo de medida',
+            'url'  => 'tipoMedida',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'medida',
+            'url'  => 'medida',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+
+            'icon' => 'fas fa-user-injured',
+            'text' => ' Paciente',
+            'url'  => 'paciente',
+        ],
+        [
+            'icon' => 'fas fa-book',
+            'text' => ' Consulta',
+            'url'  => 'consulta',
+        ],
+        [
+            'icon' =>' fas fa-balance-scale-right',
+            'text' => ' Unidad de medida',
+            'url'  => 'unidadMedida',
+        ],
+
+        
         ['header' => 'labels'],
+        ['header' => 'FUNCIONALIDADES'],
         [
-            'text'       => 'important',
+            'text'       => 'Actividad',
             'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => 'admin/actividad',
+            'icon'       => 'fab fa-buffer'
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'text'       => 'Alimento',
+            'icon_color' => 'red',
+            'url'        => 'admin/alimento',
+            'icon'       => 'fas fa-carrot'
         ],
         [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+
     ],
 
     /*

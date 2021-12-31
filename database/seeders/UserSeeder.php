@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -16,9 +16,21 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'      =>  'Admin',
-            'email'     =>  'admin@admin.com',
-            'password'  =>   Hash::make('Admin')
+            'name'=>'nutricionista',
+            'email'=>'Nutridiet@gmail.com',
+            'password'=>bcrypt('12345678'),
+         ]);
+
+         User::create([
+             'name'=>'Paciente',
+             'email'=>'DanielM@gmail.com',
+             'password'=>bcrypt('11112222')
+         ]);
+
+         User::create([
+            'name'=>'Paciente',
+            'email'=>'Junior78@gmail.com',
+            'password'=>bcrypt('33334444')
         ]);
     }
 }
