@@ -58,21 +58,22 @@
         <!--*************trabajador para el cual crear ususario**************************-->
         <div class="">
             <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">persona</label>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="ci_trab">
-                <option selected value="">Selecciona a la persona</option>
+            <select class="form-control" aria-label=".form-select-sm example" name="ci_trab">
+                <option selected value="">Sin persona</option>
                 @foreach ($users as $user)
                     {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
                     <option value="{{ $user->id }}">{{ $user->nombres }} {{ $user->apellidos }} </option>
                 @endforeach
             </select>
         </div>
-
+        <br>
         <!--***************************************-->
         <div class="mb-3">
             <label class="control-label col-md-2 col-sm-3 col-xs-12">Lista de roles</label>
             @foreach ($roles as $role)
                 <div class="form-check">
-                    <input type="radio" class="op" name="rol" id="{{ $role->id }}" value="{{ $role->id }}">
+                    <input type="radio" class="op" name="rol" id="{{ $role->id }}"
+                        value="{{ $role->id }}">
                     <label for="{{ $role->id }}">{{ $role->name }} </label>
                 </div>
             @endforeach

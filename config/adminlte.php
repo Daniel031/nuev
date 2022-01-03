@@ -261,6 +261,11 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Roles',
+            'url'  => 'roles',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'Nutricionista',
             'url'  => 'nutricionistas',
             'icon' => 'fas fa-fw fa-user',

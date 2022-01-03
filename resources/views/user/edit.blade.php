@@ -39,11 +39,16 @@
             <label for="" class="col-form-label">Editar persona a la que pertenece</label>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="ci_trab">
                 {{-- <option selected>Seleccionar</option> --}}
-                <option value='{{ $user->ci_trab }}' selected>Mantener</option>
-                <option value=''>Quitar trabajador</option>
+                {{-- @if ($user->persona_id != '')
+                    <option selected>1</option>
+                @else
+                    <option selected>2</option>
+                @endif --}}
+                <option value='{{ $user->persona_id }}' selected>Mantener persona</option>
+                <option value=''>sin persona</option>
                 @foreach ($users as $user2)
                     {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
-                    <option value="{{ $user2->id }}">{{ $user2->id }} {{ $user2->ap }} </option>
+                    <option value="{{ $user2->id }}">{{ $user2->nombres }} {{ $user2->apellidos }} </option>
                 @endforeach
             </select>
 
