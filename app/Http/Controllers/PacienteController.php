@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\Persona;
 use App\Models\Nutricionista;
 use App\Models\Tratamiento;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
@@ -79,9 +80,15 @@ class PacienteController extends Controller
     public function show(Paciente $paciente)
     {
         $tratamientos=Tratamiento::where('paciente_id',$paciente->id);
-        return view('tratamiento.show',compact('tratamientos','paciente'));
+        return view('paciente.show',compact('tratamientos','paciente'));
     }
-
+    public function perfil(Paciente $paciente)
+    {
+        $usuario=User::all()->find($paciente->persona->user_id);
+        $personas=Persona::all();
+        $nutricionistas=Nutricionista::all();
+        return view('paciente.perfil',compact('paciente','usuario','personas','nutricionistas'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,6 +100,7 @@ class PacienteController extends Controller
         $nutricionistas = Nutricionista::all();
         $personas = Persona::all();
         return view('paciente.edit',compact('paciente','personas','nutricionistas'));
+        //return $paciente->persona->fechaNacimiento;
     }
 
     /**
@@ -134,6 +142,6 @@ class PacienteController extends Controller
         $persona->delete();
 
         return redirect()->route('paciente.index');
-        
+
     }
 }

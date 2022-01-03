@@ -18,7 +18,7 @@ class CreatePersonasTable extends Migration
             $table->string('ci',10);
             $table->string('nombres');
             $table->string('apellidos');
-            $table->timestamp('fechaNacimiento');
+            $table->date('fechaNacimiento');
             $table->string('sexo',1);
             $table->unsignedInteger('celular');
             $table->string('correo')->nullable();

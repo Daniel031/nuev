@@ -22,4 +22,5 @@ class Paciente extends Model
     public function tratamientos(){
         return $this->hasMany(Tratamiento::class);
     }
+   
 }
