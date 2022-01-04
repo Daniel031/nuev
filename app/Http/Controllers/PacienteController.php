@@ -82,13 +82,6 @@ class PacienteController extends Controller
         $tratamientos=Tratamiento::where('paciente_id',$paciente->id);
         return view('paciente.show',compact('tratamientos','paciente'));
     }
-    public function perfil(Paciente $paciente)
-    {
-        $usuario=User::all()->find($paciente->persona->user_id);
-        $personas=Persona::all();
-        $nutricionistas=Nutricionista::all();
-        return view('paciente.perfil',compact('paciente','usuario','personas','nutricionistas'));
-    }
     /**
      * Show the form for editing the specified resource.
      *
