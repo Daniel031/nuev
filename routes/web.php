@@ -39,7 +39,7 @@ Route::group(['middleware'=>'auth'], function(){//si no esta logueado me manda a
     Route::resource('unidadMedida', UnidadMedidaController::class);
     Route::resource('users', UserController::class);
     Route::resource('nutricionistas', NutricionistaController::class);
-   Route::resource('roles', RoleController::class);
+    Route::resource('roles', RoleController::class);
     Route::resource('tipoMedida', Tipo_medidaController::class);
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
