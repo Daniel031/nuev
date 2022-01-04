@@ -17,10 +17,10 @@ class ConsultaController extends Controller
     public function __construct(){
         // $this->middleware('auth');//?
 
- /*       $this->middleware('can:consulta.index')->only('index');
+        $this->middleware('can:consulta.index')->only('index');
         $this->middleware('can:consulta.create')->only('create', 'store');
         $this->middleware('can:consulta.edit')->only('edit', 'update');
-        $this->middleware('can:consulta.destroy')->only('destroy');*/
+        $this->middleware('can:consulta.destroy')->only('destroy');
     }
 
     public function index()

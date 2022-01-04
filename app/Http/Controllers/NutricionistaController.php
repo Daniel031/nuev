@@ -18,10 +18,10 @@ class NutricionistaController extends Controller
     public function __construct(){
         // $this->middleware('auth');//?
 
-/*        $this->middleware('can:nutricionistas.index')->only('index');
+       $this->middleware('can:nutricionistas.index')->only('index');
         $this->middleware('can:nutricionistas.create')->only('create', 'store');
         $this->middleware('can:nutricionistas.edit')->only('edit', 'update');
-        $this->middleware('can:nutricionistas.destroy')->only('destroy');*/
+        $this->middleware('can:nutricionistas.destroy')->only('destroy');
     }
     public function index()
     {

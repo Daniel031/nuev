@@ -20,10 +20,10 @@ class PacienteController extends Controller
     public function __construct(){
         // $this->middleware('auth');//?
 
- /*       $this->middleware('can:paciente.index')->only('index');
+        $this->middleware('can:paciente.index')->only('index');
         $this->middleware('can:paciente.create')->only('create', 'store');
         $this->middleware('can:paciente.edit')->only('edit', 'update');
-        $this->middleware('can:paciente.destroy')->only('destroy');*/
+        $this->middleware('can:paciente.destroy')->only('destroy');
     }
     public function index()
     {
