@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'nutricionista',
             'email'=>'Nutridiet@gmail.com',
+            'persona_id'=>'1',
             'password'=>bcrypt('12345678'),
          ]);
 

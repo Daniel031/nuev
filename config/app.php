@@ -136,9 +136,7 @@ return [
 
     'providers' => [
 
-        /*
-         * Laravel Framework Service Providers...
-         */
+        Spatie\Permission\PermissionServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,

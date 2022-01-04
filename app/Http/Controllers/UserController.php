@@ -26,8 +26,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
-        return view('user.index', compact('users'));
+        $personas = Persona::all();
+        return view('user.index', compact('users', 'personas'));
     }
 
     /**
@@ -115,9 +115,9 @@ class UserController extends Controller
         if ($request->password != 'xxxxxxxxx') {
             $user->password = bcrypt($request->get('password'));
         }
-        // $user->persona_id = null;
-        // $user->save();
-        // $user->persona_id = $request->get('ci_trab');
+        $user->persona_id = null;
+        $user->save();
+        $user->persona_id = $request->get('ci_trab');
         $user->save();
         $user->syncRoles($request->rol); //sincronizar rol
 
