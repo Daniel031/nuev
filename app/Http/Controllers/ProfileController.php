@@ -7,7 +7,11 @@ use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\file;
+use App\Models\Images;
+use App\Models\Persona;
 use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
@@ -37,9 +41,19 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
-        //
+        $user=User::all()->find(Persona::all()->where('ci','=',$request->ci)->first()->id);
+        $imagen = $request->file('image')->store('/');
+        $url = Storage::url($imagen);
+       
+
+        $i=Images::create([
+            'url'=>$url,
+            'imageable_id'=>$user->id,
+            'imageable_type'=>User::class
+        ]);
+        return $user->image;
     }
 
     /**
@@ -74,25 +88,6 @@ class ProfileController extends Controller
     public function update(Request $request,Paciente $paciente)
     {
 
-        //return $request;
-        
-        $user=$paciente->persona->user;
-            
-            if ($request->hasFile('image')){
-                if($user->image!=null){
-                    Storage::disk('images')->delete($user->image->url);
-                    $user->image->delete();
-                }
-                $user->image()->create([
-                    'url'=>$request->image,
-                    'imageable_id'=>$user->id,
-                    'imageable_type'=>User::class
-                ]);
-            } 
-              return $user->image;
-          
-        
-        //return $user->image;
     }
 
     /**

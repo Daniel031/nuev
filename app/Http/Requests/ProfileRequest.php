@@ -31,7 +31,19 @@ class ProfileRequest extends FormRequest
             'sexo'=>'required',
             'celular'=>'required',
             'nutricionista_id'=>'required',
-            'image'=>'required'
+            'image'=>'required|image|max:2048'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'ci.required'=>'Debe rellenar el campo CI',
+            'nombres.required'=>'Debe rellenar el campo Nombre',
+            'apellidos.required'=>'Debe rellenar el campo Apellido',
+            'fechaNacimiento.required'=>'Debe rellenar el campo Fecha de Nacimiento',
+            'sexo.required'=>'Debe rellenar el campo Sexo',
+            'celular.required'=>'Debe rellenar el campo Celular',
+            'image.required'=>'Debe rellenar el campo Imagen',
         ];
     }
 }

@@ -10,7 +10,8 @@
     <div class="card">
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('profile.update', compact('paciente')) }}" method="POST">
+                <form action="{{ route('profile.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group col-sm">
                         <label for="ci">Ci</label>
                         <input type="text" class="form-control" id="ci" name="ci" placeholder="carnet de identidad"
@@ -84,14 +85,14 @@
             </div>
             <div class="col-md-6">
                 <label for="formFile" class="form-label">Foto de Perfil</label>
-                <input class="form-control" type="file" id="image" name=image accept="image/png, image/jpeg">
+                <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                @error('image')
+                     <small class="text-danger">{{$message}}</small>
+                @enderror
             </div>
             <div class="col-sm">
                 <a href="{{ route('paciente.index') }}" class="btn btn-danger col-md-3">Cancelar</a>
                 <button class="btn btn-primary col-md-3" type="submit">Guardar</button>
-
-                @csrf
-                @method('put')
             </div>
             </form>
         </div>

@@ -9,7 +9,7 @@ class Images extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['imageable_id'];
+    protected $guarded = ['id','created_at','updated_at'];
 //relación polimorfica
 public function imageable(){
     return $this->morphTo();
