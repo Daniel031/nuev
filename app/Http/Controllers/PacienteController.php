@@ -99,7 +99,7 @@ class PacienteController extends Controller
     {
         $nutricionistas = Nutricionista::all();
         $personas = Persona::all();
-        return view('paciente.edit',compact('paciente','personas','nutricionistas'));
+        return view('paciente.perfil',compact('paciente','personas','nutricionistas'));
         //return $paciente->persona->fechaNacimiento;
     }
 
