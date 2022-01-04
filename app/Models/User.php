@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements JWTSubject 
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -52,5 +52,11 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
 	return [];
+    }
+    public function image(){
+        return $this->morphOne(Images::class, 'imageable');
+    }
+    public function persona(){
+        return $this->hasOne(Persona::class);
     }
 }

@@ -39,18 +39,34 @@
                 required>
         </div>
         <div class="form-group">
-        <select id="nutricionista_id" name="nutricionista_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-            @foreach ($nutricionistas as $nutricionista)
-              <option value="{{$nutricionista->id}}">{{$personas->where('id',$nutricionista->id)->first()->nombres}}</option>
-            @endforeach
-            
-        </select>
-    </div>
-  <a href="{{route('paciente.index')}}" class="btn btn-danger mb-4" >Cancelar</a>
-  <button class="btn btn-primary mb-4" type="submit" >Guardar</button>
-@csrf
-@method('post')
-</form>
+            <select id="nutricionista_id" name="nutricionista_id" class="form-select form-select-sm"
+                aria-label=".form-select-sm example">
+                @foreach ($nutricionistas as $nutricionista)
+                    <option value="{{ $nutricionista->id }}">
+                        {{ $personas->where('id', $nutricionista->id)->first()->nombres }}</option>
+                @endforeach
+
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <label for="formFile" class="form-label">Foto de Perfil</label>
+                    <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                    @error('image')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+        </div>
+            <a href="{{ route('paciente.index') }}" class="btn btn-danger mb-4">Cancelar</a>
+            <button class="btn btn-primary mb-4" type="submit">Guardar</button>
+            @csrf
+            @method('post')
+    </form>
 
 
 @stop
