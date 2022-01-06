@@ -270,11 +270,11 @@ return [
             'url'  => 'nutricionistas',
             'icon' => 'fas fa-fw fa-user',
         ],
-  /*      [
-            'text' => 'Roles',
-            'url'  => 'roles',
+        [
+            'text' => 'Tratamiento',
+            'url'  => 'tratamientos',
             'icon' => 'fas fa-fw fa-user',
-        ],*/
+        ],
         [
             'text' => 'tipo de medida',
             'url'  => 'tipoMedida',

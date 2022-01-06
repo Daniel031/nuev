@@ -79,7 +79,7 @@
                     <label for="" class="px-4">Imprimir</label></a>
             </div>
             <div class="row">
-                <a href="" class="btn btn-secondary col-sm py-4"><i
+                <a href="{{url("tratamientos", $paciente->id)}}" class="btn btn-secondary col-sm py-4"><i
                         class="fas fa-notes-medical fa-6x"></i><label for="" class="px-4">Tratamiento</label></a>
             </div>
         </div>

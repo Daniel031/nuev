@@ -3,7 +3,7 @@
 @section('title', 'TRATAMIENTO')
 
 @section('content_header')
-    <h1>Tratamientos del paciente {{ $persona->nombres }} {{ $persona->apellidos }}</h1>
+    <h1>Tratamientos</h1>
 @stop
 
 @section('content')
@@ -11,12 +11,12 @@
 
     <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
+
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">PACIENTE</th>
                 <th scope="col">OBJETIVO</th>
-                <th scope="col">INICIO</th>
-                <th scope="col">FIN</th>
-                <th scope="col">COSTO</th>
+                <th scope="col">FECHA INICIO</th>
+                <th scope="col">FECHA FIN</th>
                 <th scope="col">ESTADO</th>
                 <th scope="col">ACCIONES</th>
 
@@ -25,21 +25,31 @@
         <TBODY>
             @foreach ($tratamientos as $tratamiento)
                 <tr>
-                    <td>{{ $tratamiento->id }}</td>
+                    @foreach ($personas as $persona)
+                        @php
+                            if ($persona->id == $tratamiento->paciente_id) {
+                                $aux=$persona->nombres." ".$persona->apellidos;
+                            }
+                        @endphp
+                    @endforeach
+                    <td>{{ $aux }}</td>
+
                     <td>{{ $tratamiento->objetivo }}</td>
                     <td>{{ $tratamiento->fechaInicio }}</td>
                     <td>{{ $tratamiento->fechaFin }}</td>
-                    <td>{{ $tratamiento->costo }}</td>
+                    <td>@php
+                        $aux = ($tratamiento->completo == 0) ? 'en curso' : 'finalizado';
+                    @endphp
+                    {{ $aux }}</td>
+
                     <td>
-                        @php
-                            $aux = ($tratamiento->completo == 0) ? 'en curso' : 'finalizado';
-                        @endphp
-                        {{ $aux }}
-                    </td>
-                    <td>
+
+
                         <form action="{{ route('tratamientos.destroy', compact('tratamiento')) }}" method="POST">
-                            <a href="{{ route('tratamientos.edit', compact('tratamiento')) }}"
-                                class="btn btn-primary">Editar</a>
+                            <a href="" style="color:gray"><i class="fas fa-eye fa-2x px-2"></i></a>{{-- Planes del tratamiento --}}
+                            <a href="{{ route('tratamientos.edit', compact('tratamiento')) }}" style="color:blue""><i
+                                                class="   fas fa-edit fa-2x px-2"></i></a>
+
                             @csrf
                             <!--metodo para añadir token a un formulario-->
                             @method('delete')
@@ -52,7 +62,6 @@
             @endforeach
         </TBODY>
     </table>
-    <a href="{{ route('paciente.show', compact('paciente')) }}" class="btn btn-secondary mb-4">Volver</a>
 @stop
 
 @section('css')

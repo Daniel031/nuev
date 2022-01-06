@@ -59,6 +59,7 @@ class PacienteController extends Controller
         $persona->fechaNacimiento = $request->get('fechaNacimiento');
         $persona->sexo = $request->get('sexo');
         $persona->celular = $request->get('celular');
+        $persona->tipo = 'P';
         $persona->save();
 
         $paciente = new Paciente();
