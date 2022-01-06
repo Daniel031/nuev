@@ -12,7 +12,6 @@
     <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">OBJETIVO</th>
                 <th scope="col">INICIO</th>
                 <th scope="col">FIN</th>
@@ -25,7 +24,6 @@
         <TBODY>
             @foreach ($tratamientos as $tratamiento)
                 <tr>
-                    <td>{{ $tratamiento->id }}</td>
                     <td>{{ $tratamiento->objetivo }}</td>
                     <td>{{ $tratamiento->fechaInicio }}</td>
                     <td>{{ $tratamiento->fechaFin }}</td>
