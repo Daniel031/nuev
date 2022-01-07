@@ -31,7 +31,7 @@ class PacienteRequest extends FormRequest
             'sexo'=>'required',
             'celular'=>'required',
             'nutricionista_id'=>'required',
-            'image'=>'required|image|max:2048'
+            'image'=>'image|max:2048'
         ];
     }
     public function messages()
