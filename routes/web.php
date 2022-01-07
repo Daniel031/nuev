@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\MedidaController;
@@ -45,4 +46,5 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
     Route::resource('tratamientos', TratamientoController::class);
+    Route::resource('administradors', AdministradorController::class);
 });
