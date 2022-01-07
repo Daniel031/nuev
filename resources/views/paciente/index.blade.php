@@ -17,6 +17,7 @@
                 <th scope="col">NOMBRE</th>
                 <th scope="col">APELLIDOS</th>
                 <th scope="col">CELULAR</th>
+                <th scope="col">FOTO</th>
                 <th scope="col">ACCIONES</th>
 
             </tr>
@@ -25,11 +26,13 @@
             @foreach ($pacientes as $paciente)
                 <tr>
 
-                    <td>{{ $personas->where('id', $paciente->id)->first()->ci }}</td>
-                    <td>{{ $personas->where('id', $paciente->id)->first()->nombres }}</td>
-                    <td>{{ $personas->where('id', $paciente->id)->first()->apellidos }}</td>
-                    <td>{{ $personas->where('id', $paciente->id)->first()->celular }}</td>
-
+                    <td>{{ $paciente->persona->ci }}</td>
+                    <td>{{ $paciente->persona->nombres }}</td>
+                    <td>{{ $paciente->persona->apellidos }}</td>
+                    <td>{{ $paciente->persona->celular }}</td>
+                    <td>
+                       
+                    </td>
                     <td>
 
 
@@ -37,7 +40,7 @@
                             <a href="{{ route('paciente.show', compact('paciente')) }}" style="color:gray"><i
                                     class="fas fa-eye fa-2x px-2"></i></a>
                             <a href="{{ route('paciente.edit', compact('paciente')) }}" style="color:blue""><i
-                                    class="fas fa-edit fa-2x px-2"></i></a>
+                                            class="  fas fa-edit fa-2x px-2"></i></a>
 
                             @csrf
                             <!--metodo para añadir token a un formulario-->
