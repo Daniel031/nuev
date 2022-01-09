@@ -29,13 +29,13 @@ class RoleSeeder extends Seeder
 
 
         Permission::create(['name'=>'nutricionistas.index',
-                            'description'=>'ver listado de cargos'])->syncRoles([$role1, $role2]);
+                            'description'=>'ver listado de nutricionistas'])->syncRoles([$role1, $role2]);
         Permission::create(['name'=>'nutricionistas.create',
-                            'description'=>'crear cargo'])->syncRoles([$role1]);
+                            'description'=>'crear nutricionistas'])->syncRoles([$role1]);
         Permission::create(['name'=>'nutricionistas.edit',
-                            'description'=>'editar cargo'])->syncRoles([$role1]);
+                            'description'=>'editar nutricionistas'])->syncRoles([$role1]);
         Permission::create(['name'=>'nutricionistas.destroy',
-                            'description'=>'eliminar cargo'])->syncRoles([$role1]);
+                            'description'=>'eliminar nutricionistas'])->syncRoles([$role1]);
 
 
         Permission::create(['name'=>'proveedors.index',
@@ -69,23 +69,23 @@ class RoleSeeder extends Seeder
     
 
         Permission::create(['name'=>'paciente.index',
-                            'description'=>'ver listado de trabajadores'])->syncRoles([$role1, $role2]);
+                            'description'=>'ver listado de paciente'])->syncRoles([$role1, $role2]);
         Permission::create(['name'=>'paciente.create',
-                            'description'=>'crear trabajador'])->syncRoles([$role1]);
+                            'description'=>'crear paciente'])->syncRoles([$role1]);
         Permission::create(['name'=>'paciente.edit',
-                            'description'=>'editar trabajador'])->syncRoles([$role1]);
+                            'description'=>'editar paciente'])->syncRoles([$role1]);
         Permission::create(['name'=>'paciente.destroy',
-                            'description'=>'eliminar trabajador'])->syncRoles([$role1]); 
+                            'description'=>'eliminar paciente'])->syncRoles([$role1]); 
 
 
          Permission::create(['name'=>'consulta.index',
-                            'description'=>'ver listado de trabajadores'])->syncRoles([$role1, $role2]);
+                            'description'=>'ver listado de consulta'])->syncRoles([$role1, $role2]);
         Permission::create(['name'=>'consulta.create',
-                            'description'=>'crear trabajador'])->syncRoles([$role1]);
+                            'description'=>'crear consulta'])->syncRoles([$role1]);
         Permission::create(['name'=>'consulta.edit',
-                            'description'=>'editar trabajador'])->syncRoles([$role1]);
+                            'description'=>'editar consulta'])->syncRoles([$role1]);
         Permission::create(['name'=>'consulta.destroy',
-                            'description'=>'eliminar trabajador'])->syncRoles([$role1]); 
+                            'description'=>'eliminar consulta'])->syncRoles([$role1]); 
 
 
         // Permission::create(['name'=>'encargados.index',

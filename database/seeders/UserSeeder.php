@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name'=>'nutricionista',
             'email'=>'Nutridiet@gmail.com',
             'password'=>bcrypt('12345678'),
-         ]);
+        ])->assignRole(1);
 
          User::create([
              'name'=>'Paciente',

@@ -10,33 +10,34 @@
     <div class="card">
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('profile.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('paciente.update', compact('paciente')) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-group col-sm">
                         <label for="ci">Ci</label>
                         <input type="text" class="form-control" id="ci" name="ci" placeholder="carnet de identidad"
-                            required value="{{ $personas->where('id', $paciente->id)->first()->ci }}">
+                            required value="{{ $persona->ci }}">
                     </div>
                     <div class="form-group col-sm">
                         <label for="nombres">Nombres </label>
                         <input type="text" class="form-control" id="nombres" name="nombres" placeholder="nombres" required
-                            value="{{ $personas->where('id', $paciente->id)->first()->nombres }}">
+                            value="{{ $persona->nombres }}">
                     </div>
                     <div class="form-group col-sm">
                         <label for="apellidos">Apellidos </label>
                         <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="apellidos"
-                            required value="{{ $personas->where('id', $paciente->id)->first()->apellidos }}">
+                            required value="{{ $persona->apellidos }}">
                     </div>
                     <div class="form-group col-sm">
                         <label for="fechaNacimiento">Fecha de nacimiento </label>
                         <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"
-                            placeholder="Fecha de Nacimiento" required
-                            value="{{ $personas->where('id', $paciente->id)->first()->fechaNacimiento }}">
+                            placeholder="Fecha de Nacimiento" required value="{{ $persona->fechaNacimiento }}">
                     </div>
                     <div class="form-group col-sm">
                         <label for="sexo">Sexo</label>
                         <select class="form-control" id="sexo" name="sexo">
-                            @switch($personas->where('id',$paciente->id)->first()->sexo )
+                            @switch($persona->sexo )
                                 @case("F")
                                     <option value="M">Masculino</option>
                                     <option selected value="F">Femenino</option>
@@ -61,8 +62,7 @@
                     <div class="form-group col-sm">
                         <label for="celular">Celular </label>
                         <input type="number" class="form-control" id="celular" name="celular"
-                            placeholder="Numero de celular" required
-                            value="{{ $personas->where('id', $paciente->id)->first()->celular }}">
+                            placeholder="Numero de celular" required value="{{ $persona->celular }}">
                     </div>
                     <div class="form-group col-sm">
                         <select id="nutricionista_id" name="nutricionista_id" class="form-select form-select-sm"
@@ -85,10 +85,28 @@
             </div>
             <div class="col-md-6">
                 <label for="formFile" class="form-label">Foto de Perfil</label>
-                <input class="form-control" type="file" id="image" name="image" accept="image/*">
-                @error('image')
-                     <small class="text-danger">{{$message}}</small>
-                @enderror
+                @if ($persona->image == null)
+                    <div class="form-group">
+                        <div class="image-wrapper">
+                            <img id="picture"
+                                src="https://www.ver.bo/wp-content/uploads/2019/01/4b463f287cd814216b7e7b2e52e82687.png_1805022883.png">
+                        </div>
+                        <p class="py-1">Sin foto de Perfil</p>
+                        <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @else
+                    <div class="form-group px-2">
+                        <div class="image-wrapper mb-3">
+                            <img id="picture" src="{{ Storage::url($image->url) }}" class="img-responsive img-thumbnail">
+
+                        </div>
+                        <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                    </div>
+
+                @endif
             </div>
             <div class="col-sm">
                 <a href="{{ route('paciente.index') }}" class="btn btn-danger col-md-3">Cancelar</a>
@@ -100,6 +118,20 @@
 @stop
 
 @section('css')
+    <style>
+        .image-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+
+        .image-wrapper img {
+            position: absolute;
+            object-file: cover;
+            width: 65%;
+            height: 100%;
+        }
+
+    </style>
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -118,5 +150,16 @@
                 ]
             });
         });
+        //cambiar imagen
+        document.getElementById('image').addEventListener('change', cambiarImagen);
+
+        function cambiarImagen(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                document.getElementById('picture').setAttribute('src', event.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
     </script>
 @stop

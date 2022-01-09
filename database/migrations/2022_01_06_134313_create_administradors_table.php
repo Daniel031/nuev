@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuscripcionsTable extends Migration
+class CreateAdministradorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateSuscripcionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('suscripcions', function (Blueprint $table) {
+        Schema::create('administradors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->integer('meses');
-            $table->decimal('monto_total');
+            $table->foreign('id')->references('id')->on('personas');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateSuscripcionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suscripcions');
+        Schema::dropIfExists('administradors');
     }
 }

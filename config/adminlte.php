@@ -256,6 +256,11 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text' => 'Administrador',
+            'url'  => 'administradors',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'Usuario',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
@@ -273,6 +278,16 @@ return [
         [
             'text' => 'Tratamiento',
             'url'  => 'tratamientos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Suscripcion',
+            'url'  => 'suscripcions',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Suscriptores',
+            'url'  => 'suscripcionUsuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

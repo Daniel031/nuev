@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\MedidaController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\NutricionistaController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Suscripcion_usuarioController;
+use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\Tipo_medidaController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
@@ -54,7 +57,9 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
     Route::resource('tratamientos', TratamientoController::class);
-   
+    Route::resource('administradors', AdministradorController::class);
+    Route::resource('suscripcions', SuscripcionController::class);
+    Route::resource('suscripcionUsuarios', Suscripcion_usuarioController::class);
 });
 
 Route::get( '/tratamiento/generar',  [TratamientoController::class, 'generar'] );

@@ -29,7 +29,7 @@
                     @foreach ($personas as $persona)
                         @php
                             if ($persona->id == $tratamiento->paciente_id) {
-                                $aux=$persona->nombres." ".$persona->apellidos;
+                                $aux = $persona->nombres . ' ' . $persona->apellidos;
                             }
                         @endphp
                     @endforeach
@@ -39,17 +39,15 @@
                     <td>{{ $tratamiento->fechaInicio }}</td>
                     <td>{{ $tratamiento->fechaFin }}</td>
                     <td>@php
-                        $aux = ($tratamiento->completo == 0) ? 'en curso' : 'finalizado';
+                        $aux = $tratamiento->completo == 0 ? 'en curso' : 'finalizado';
                     @endphp
-                    {{ $aux }}</td>
+                        {{ $aux }}</td>
 
                     <td>
-
-
-                        <form action="{{ route('tratamientos.destroy', compact('tratamiento')) }}" method="POST">
-                            <a href="" style="color:gray"><i class="fas fa-eye fa-2x px-2"></i></a>{{-- Planes del tratamiento --}}
-                            <a href="{{ route('tratamientos.edit', compact('tratamiento')) }}" style="color:blue""><i
-                                                class="   fas fa-edit fa-2x px-2"></i></a>
+                        <form action="{{ route('tratamientos.destroy', $tratamiento) }}" method="POST">
+                            <a href="" style="color:gray" class="btn btn-primary" ><i class="fas fa-eye fa-2x px-2"></i></a>{{-- Planes del tratamiento --}}
+                            <a href="{{ route('tratamientos.edit', $tratamiento) }}" style="color:blue" class="btn btn-primary"><i class="
+                                   fas fa-edit fa-2x px-2"></i></a>
 
                             @csrf
                             <!--metodo para añadir token a un formulario-->
