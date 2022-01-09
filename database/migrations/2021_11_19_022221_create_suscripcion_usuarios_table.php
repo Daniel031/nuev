@@ -15,8 +15,8 @@ class CreateSuscripcionUsuariosTable extends Migration
     {
         Schema::create('suscripcion_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fecha_inicio');
-            $table->timestamp('fecha_fin');
+            $table->timestamp('fecha_inicio')->nullable();
+            $table->timestamp('fecha_fin')->nullable();
             $table->boolean('activo');
 
             $table->foreignId('user_id')->references('id')->on('users')

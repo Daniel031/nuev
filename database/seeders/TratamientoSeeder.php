@@ -17,18 +17,18 @@ class TratamientoSeeder extends Seeder
         $tratamientos = ([
             [
                 'objetivo' => 'Bajar de peso',
-                'fechaInicio' => '10-10-2021',
-                'fechaFin' => '22-01-2022',
+                'fechaInicio' => '2021-10-10',
+                'fechaFin' => '2022-01-22',
                 'costo' => '2000',
-                'completo' => 'false',
+                'completo' => false,
                 'paciente_id' => 2,
             ],
             [
                 'objetivo' => 'Aumentar masa muscular',
-                'fechaInicio' => '09-08-2021',
-                'fechaFin' => '22-12-2021',
+                'fechaInicio' => '2021-09-08',
+                'fechaFin' => '2021-12-22',
                 'costo' => '2200',
-                'completo' => 'false',
+                'completo' => false,
                 'paciente_id' => 3,
             ],
         ]);

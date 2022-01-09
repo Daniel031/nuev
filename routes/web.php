@@ -11,8 +11,11 @@ use App\Http\Controllers\Tipo_medidaController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
 use App\Http\Controllers\UserController;
+use App\Models\Tratamiento;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facade\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +32,17 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/reportepaciente-pdf', [PacienteController::class, 'impriPDF']);
+// Route::get('/reportepaciente-excel', [PacienteController::class, 'UserExport']);
+Route::get('/reportenutricionistas-pdf', [NutricionistaController::class, 'impriPDF']);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
 Route::group(['middleware' => 'auth'], function () { //si no esta logueado me manda a loguearme
-    Route::resource('paciente', PacienteController::class);
+
+    Route::resource('/admin/paciente', PacienteController::class);
     Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'perfil'])->name('paciente.perfil');
     Route::resource('profile', ProfileController::class);
     Route::resource('consulta', ConsultaController::class);
@@ -45,4 +54,7 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
     Route::resource('tratamientos', TratamientoController::class);
+   
 });
+
+Route::get( '/tratamiento/generar',  [TratamientoController::class, 'generar'] );

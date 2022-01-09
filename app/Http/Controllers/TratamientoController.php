@@ -112,4 +112,46 @@ class TratamientoController extends Controller
 
         return redirect()->route('tratamientos.index');
     }
+
+    public function generar( Request $request )
+    {
+        $fechainicio = $request->input( 'fechainicio', null );
+        $fechafinal = $request->input( 'fechafinal', null );
+
+        $paciente = $request->input( 'paciente', null );
+
+        $consulta = [];
+
+        if ( !is_null( $fechainicio ) && !is_null( $fechafinal ) ) {
+            if ( is_null( $fechafinal ) ) {
+                array_push( $consulta, [ 'tratamientos.fechaInicio', '>=', $fechainicio ] );
+            } else {
+                array_push( $consulta, [ 'tratamientos.fechaInicio', '>=', $fechafinal ] );
+                array_push( $consulta, [ 'tratamientos.fechaFin', '<=', $fechafinal ] );
+            }
+        }
+
+        if ( !is_null( $paciente ) ) {
+            array_push( $consulta, [ 'tratamientos.paciente_id', '=', $paciente ] );
+        }
+
+        $tratento = new Tratamiento();
+
+        $arrayTratatmiento = $tratento
+            ->select( 
+                'tratamientos.id', 'tratamientos.objetivo', 'tratamientos.fechaInicio',
+                'tratamientos.fechaFin', 'tratamientos.costo',
+                'pers.nombres', 'pers.apellidos', 'pers.fechaNacimiento', 'pers.sexo'
+            )
+            ->join( 'pacientes as pacte', 'tratamientos.paciente_id', '=', 'pacte.id' )
+            ->join( 'personas as pers', 'pacte.id', '=', 'pers.id' )
+            ->where( $consulta )
+            ->orderBy( 'tratamientos.id', 'DESC' )
+            ->get();
+
+        $pdf = \PDF::loadview( 'reporte.tratamiento', compact( 'arrayTratatmiento' ) );
+        return $pdf->download( 'tratamiento.pdf' );
+
+    }
+
 }

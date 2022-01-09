@@ -3,13 +3,14 @@
 @section('title', 'PACIENTE')
 
 @section('content_header')
-    <h1>Nutricionista</h1>
+    <h1>Lista de Nutricionista</h1>
 @stop
 
 @section('content')
 <a href=" {{route('nutricionistas.create')}} " class="btn btn-primary mb-4" >CREAR</a>
+<a href='/reportenutricionistas-pdf' class="btn btn-primary mb-4" target="_blank">REPORTE</a>
 
-<table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
+<table id="nutricionistas" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
     <thead class="bg-dark text-white">
         
        <tr>

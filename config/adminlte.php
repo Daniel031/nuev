@@ -289,7 +289,7 @@ return [
 
             'icon' => 'fas fa-user-injured',
             'text' => ' Paciente',
-            'url'  => 'paciente',
+            'url'  => 'admin/paciente',
         ],
         [
             'icon' => 'fas fa-book',

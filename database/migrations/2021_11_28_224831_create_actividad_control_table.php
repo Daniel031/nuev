@@ -25,9 +25,9 @@ class CreateActividadControlTable extends Migration
             $table->unsignedInteger('tiempoDiario');
             $table->unsignedInteger('promedioDiario')->nullable();
             $table->unsignedInteger('gastoActividad')->nullable();//gasto total de toda la actividad
-            $table->timestamp('fechaHora_establecida');
+            $table->timestamp('fechaHora_establecida')->nullable();
             $table->timestamp('fechaHora_cumplida')->nullable();
-            $table->boolean('cumplida')->default('false');
+            $table->boolean('cumplida')->default(false);
             $table->timestamps();
         });
     }

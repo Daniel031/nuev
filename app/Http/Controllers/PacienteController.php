@@ -9,6 +9,7 @@ use App\Models\Nutricionista;
 use App\Models\Tratamiento;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PacienteController extends Controller
 {
@@ -17,26 +18,47 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function __construct(){
         // $this->middleware('auth');//?
 
-        $this->middleware('can:paciente.index')->only('index');
-        $this->middleware('can:paciente.create')->only('create', 'store');
-        $this->middleware('can:paciente.edit')->only('edit', 'update');
-        $this->middleware('can:paciente.destroy')->only('destroy');
+        // $this->middleware('can:paciente.index')->only('index');
+        // $this->middleware('can:paciente.create')->only('create', 'store');
+        // $this->middleware('can:paciente.edit')->only('edit', 'update');
+        // $this->middleware('can:paciente.destroy')->only('destroy');
     }
+    // public function PDF(){
+      //  $pdf=\PDF::loadView('paciente');
+        //return $pdf->download('paciente.pdf');
+    //}
+    public function impriPDF(){
+        //dd("hola");
+        $pacientes = Paciente::all();
+        $pdf=\PDF::loadview('reporte.paciente',compact('pacientes'));
+        return $pdf ->download('paciente.pdf');
+    
+    }
+    // public function UserExport()
+    // {       
+       
+    // return Excel::download(new UserExport,'paciente-xlsx');
+       
+    // }
+    
     public function index()
     {
         $pacientes = Paciente::all();
         $personas = Persona::all();
         return view('paciente.index',compact('pacientes','personas'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         $nutricionistas = Nutricionista::all();
