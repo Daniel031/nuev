@@ -1,12 +1,83 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR PACIENTE')
+@section('title', 'CREAR PLAN')
 
 @section('content_header')
-    <h1>Crear Pacientes</h1>
+    <h1>Crear Plan de Alimentacion</h1>
 @stop
 
 @section('content')
+<div class="form-group">
+    <label for="fechaInicio">Fecha de inicio </label>
+    <input type="date"  class="form-control" id="fechaInicio" name = "fechaInicio" placeholder="Fecha de Inicio" required>
+</div>
+<div class="form-group">
+    <label for="NumeroDeSemanas">Numero de semanas </label>
+    <input type="number"  class="form-control" id="numeroDeSemanas" name = "numeroDeSemanas" placeholder="numero de semanas" required value = 1>
+</div>
+
+
+
+
+
+    <style>
+        #inner { text-align: left; margin: 0 auto; }
+        .t { float: left; }
+        table { border: 1px solid black; }
+      </style>
+      
+
+        <div id="inner">
+
+
+          <div class="t">
+            <table  class="table table-striped table-bordered shadow-lg mt-3">
+                <thead class="bg-dark text-white">
+        
+                    <tr>
+                     <th scope="col">Dia</th>
+                       <th scope="col">Asignar grupo</th>   
+                    </tr>
+                 </thead>
+                 <TBODY>
+                        <tr>
+                             <td>
+                 
+                 
+         
+                             </td>
+                        </tr>
+                 </TBODY>
+            </table>
+          </div>
+
+          <div class="t">
+            <table  class="table table-striped table-bordered shadow-lg mt-3">
+                <thead class="bg-dark text-white">
+        
+                    <tr>
+                     <th scope="col">Dias del grupo</th>
+                    </tr>
+                 </thead>
+                 <TBODY>
+                        <tr>
+                             <td>
+                 
+                 
+         
+                             </td>
+                        </tr>
+                 </TBODY>
+            </table>
+          </div>
+ 
+          </table>
+        </div>
+
+
+
+
+
 
 
 @stop

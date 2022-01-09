@@ -8,8 +8,6 @@
 @stop
 @section('content')
 
-<a href="{{route(paciente.tratamiento.planAlimentacion.create,compact('paciente','tratamiento'))}}" type="button">CREAR</a>
-
 
 <label for="">
     Codigo de tratamiento : {{$tratamiento->id}} <br>
@@ -23,6 +21,8 @@
     @endif
 <br>
 </label>
+<br>
+<a href=" {{ route('paciente.tratamiento.planAlimentacion.create',compact('paciente','tratamiento')) }} " class="btn btn-primary mb-4">CREAR</a>
 
 <br>
 <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">

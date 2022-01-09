@@ -18,7 +18,7 @@ class PlanAlimentacionController extends Controller
         
         $planAlimentacions = PlanAlimentacion::where('tratamiento_id',$tratamiento->id);
 
-       return view('planAlimentacion.index',compact('tratamiento','planAlimentacions'));
+       return view('planAlimentacion.index',compact('paciente','tratamiento','planAlimentacions'));
     }
 
     /**
