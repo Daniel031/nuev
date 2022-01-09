@@ -15,6 +15,7 @@ class CreateSuscripcionsTable extends Migration
     {
         Schema::create('suscripcions', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->integer('meses');
             $table->decimal('monto_total');
             $table->timestamps();

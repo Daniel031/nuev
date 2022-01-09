@@ -17,7 +17,8 @@ class CreateSuscripcionUsuariosTable extends Migration
             $table->id();
             $table->timestamp('fecha_inicio');
             $table->timestamp('fecha_fin');
-            $table->boolean('activo');
+            $table->string('activo');
+            $table->boolean('pagado');
 
             $table->foreignId('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
