@@ -16,7 +16,9 @@ class TratamientoController extends Controller
      */
     public function index()
     {
-        //
+        $tratamientos= Tratamiento::all();
+        $personas= Persona::where('tipo', 'P')->get();
+        return view('tratamiento.index', compact('tratamientos', 'personas'));
     }
 
     /**
@@ -26,7 +28,9 @@ class TratamientoController extends Controller
      */
     public function create()
     {
-        return view('tratamiento.create');
+        $personas = Persona::where('tipo', 'P')->get();
+        // return $personas;
+        return view('tratamiento.create', compact('personas'));
     }
 
     /**
@@ -41,20 +45,13 @@ class TratamientoController extends Controller
         $tratamiento->objetivo=$request->objetivo;
         $tratamiento->fechaInicio=$request->fechaInicio;
         $tratamiento->fechaFin=$request->fechaFin;
-        $tratamiento->costo=$request->consto;
-        $tratamiento->completo->$request->completo;
+        $tratamiento->costo=$request->costo;
+        $tratamiento->completo=false;
+        $tratamiento->paciente_id=$request->paciente_id;
+        $tratamiento->save();
+        
+        return redirect()->route('tratamientos.index');
 
-
-
-        $table->id();
-        $table->text('objetivo');
-        $table->date('fechaInicio');
-        $table->date('fechaFin');
-        $table->decimal('costo');
-        $table->boolean('completo');
-        $table->foreignId('paciente_id')->references('id')->on('pacientes')
-        ->onUpdate('cascade')->onDelete('cascade');
-        $table->timestamps();
     }
 
     /**
@@ -63,11 +60,12 @@ class TratamientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tratamiento $tratamiento)
+    public function show($id)
     {
-        $paciente=Paciente::where('id',$tratamiento->paciente_id)->first();
-        $tratamientos=Tratamiento::where('paciente_id',$paciente->id);
-        return view('tratamiento.show',compact('tratamientos','paciente'));
+        $persona=Persona::where('id',$id)->first();
+        $paciente=Paciente::where('id',$id)->first();
+        $tratamientos=Tratamiento::where('paciente_id',$id)->get();
+        return view('tratamiento.show',compact('tratamientos', 'persona', 'paciente'));
     }
 
     /**
@@ -76,9 +74,11 @@ class TratamientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(tratamiento $tratamiento)
     {
-        //
+        $personas = Persona::where('tipo', 'P')->get();
+        return view('tratamiento.edit',compact('personas','tratamiento'));
+        //return $paciente->persona->fechaNacimiento;
     }
 
     /**
@@ -88,9 +88,16 @@ class TratamientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,tratamiento $tratamiento)
     {
-        //
+        $tratamiento->objetivo = $request->get('objetivo');
+        $tratamiento->fechaInicio = $request->get('fechaInicio');
+        $tratamiento->fechaFin= $request->get('fechaFin');
+        $tratamiento->costo = $request->get('costo');
+        $tratamiento->paciente_id = $request->get('paciente_id');
+        $tratamiento->completo = $request->get('completo');
+        $tratamiento->save();
+        return redirect()->route('tratamientos.index');
     }
 
     /**
@@ -99,8 +106,10 @@ class TratamientoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(tratamiento $tratamiento)
     {
-        //
+        $tratamiento->delete();
+
+        return redirect()->route('tratamientos.index');
     }
 }

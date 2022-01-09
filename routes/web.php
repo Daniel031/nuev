@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\NutricionistaController;
+use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Tipo_medidaController;
+use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
 use App\Http\Controllers\UserController;
-use Spatie\Permission\Contracts\Role;
-use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanAlimentacionController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,7 @@ use App\Http\Controllers\PlanAlimentacionController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 Auth::routes();
 
@@ -34,20 +34,21 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-Route::group(['middleware'=>'auth'], function(){//si no esta logueado me manda a loguearme
+Route::group(['middleware' => 'auth'], function () { //si no esta logueado me manda a loguearme
     Route::resource('paciente', PacienteController::class);
+    Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'perfil'])->name('paciente.perfil');
+    Route::resource('profile', ProfileController::class);
     Route::resource('consulta', ConsultaController::class);
     Route::resource('unidadMedida', UnidadMedidaController::class);
     Route::resource('users', UserController::class);
     Route::resource('nutricionistas', NutricionistaController::class);
-   Route::resource('roles', RoleController::class);
+    Route::resource('roles', RoleController::class);
     Route::resource('tipoMedida', Tipo_medidaController::class);
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
-    Route::resource('tratamiento', TratamientoController::class);
-
     Route::resource('paciente.tratamiento',TratamientoController::class);
     Route::resource('paciente.tratamiento.planAlimentacion',PlanAlimentacionController::class);
 
-
+    Route::resource('tratamientos', TratamientoController::class);
+    Route::resource('administradors', AdministradorController::class);
 });

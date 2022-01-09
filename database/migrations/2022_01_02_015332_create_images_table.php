@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePacientesTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePacientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pacientes', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-
-            $table->foreign('id')->references('id')->on('personas');
-            $table->unsignedBigInteger('nutricionista_id');
-            $table->foreign('nutricionista_id')->references('id')->on('nutricionistas');
+            $table->string('url');
+            $table->unsignedBigInteger('imageable_id');
+            $table->string('imageable_type');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreatePacientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacientes');
+        Schema::dropIfExists('images');
     }
 }

@@ -1,50 +1,46 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR PACIENTE')
+@section('title', 'CREAR TRATAMIENTO')
 
 @section('content_header')
-    <h1>Crear Pacientes</h1>
+    <h1>Crear Tratamiento</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('paciente.store') }}" method="POST">
+    <form action="{{ route('tratamientos.store') }}" method="POST">
         <div class="form-group">
-            <label for="ci">Ci</label>
-            <input type="text" class="form-control" id="ci" name="ci" placeholder="carnet de identidad" required>
+            <label for="ci">Objetivo clínico</label>
+            <input type="text" class="form-control" id="ci" name="objetivo" placeholder="objetivos esperados" required>
         </div>
         <div class="form-group">
-            <label for="nombres">Nombres </label>
-            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="nombres" required>
+            <label for="nombres">Fecha de inicio </label>
+            <input type="date" class="form-control" id="nombres" name="fechaInicio" placeholder="" required>
         </div>
         <div class="form-group">
-            <label for="apellidos">Apellidos </label>
-            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="apellidos" required>
+            <label for="apellidos">Fecha de finalización </label>
+            <input type="date" class="form-control" id="apellidos" name="fechaFin" placeholder="" required>
         </div>
         <div class="form-group">
-            <label for="fechaNacimiento">Fecha de nacimiento </label>
-            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"
-                placeholder="Fecha de Nacimiento" required>
+            <label for="apellidos">Costo de tratamiento</label>
+            <input type="number" class="form-control" id="apellidos" name="costo" placeholder="0.00 bs" required>
         </div>
-        <div class="form-group">
-            <label for="sexo">Sexo</label>
-            <select class="form-control" id="sexo" name="sexo">
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-                <option value="O">Otros</option>
+        <div class="">
+            <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Paciente</label>
+            <select class="form-control" aria-label=".form-select-sm example" name="paciente_id">
+                <option value="">Escoger paciente</option>
+                @foreach ($personas as $persona)
+                    <option value="{{ $persona->id }}"> {{ $persona->nombres }} {{ $persona->apellidos }}</option>
+                @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <label for="celular">Celular </label>
-            <input type="number" class="form-control" id="celular" name="celular" placeholder="Numero de celular"
-                required>
+        <div>
+            <br>
+            <a href="{{ url()->previous() }}" class="btn btn-danger mb-4">Cancelar</a>
+            <button class="btn btn-primary mb-4" type="submit">Guardar</button>
+            @csrf
+            @method('post')
         </div>
-
-
-  <a href="{{route('paciente.index')}}" class="btn btn-danger mb-4" >Cancelar</a>
-  <button class="btn btn-primary mb-4" type="submit" >Guardar</button>
-@csrf
-@method('post')
-</form>
+    </form>
 
 
 @stop

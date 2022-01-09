@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
 
@@ -256,6 +256,11 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
+            'text' => 'Administrador',
+            'url'  => 'administradors',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'Usuario',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
@@ -270,11 +275,11 @@ return [
             'url'  => 'nutricionistas',
             'icon' => 'fas fa-fw fa-user',
         ],
-  /*      [
-            'text' => 'Roles',
-            'url'  => 'roles',
+        [
+            'text' => 'Tratamiento',
+            'url'  => 'tratamientos',
             'icon' => 'fas fa-fw fa-user',
-        ],*/
+        ],
         [
             'text' => 'tipo de medida',
             'url'  => 'tipoMedida',
@@ -302,7 +307,7 @@ return [
             'url'  => 'unidadMedida',
         ],
 
-        
+
         ['header' => 'labels'],
         ['header' => 'FUNCIONALIDADES'],
         [

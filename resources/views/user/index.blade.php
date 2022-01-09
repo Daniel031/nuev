@@ -12,6 +12,7 @@
             <strong>{{ session('info') }}</strong>
         </div>
     @endif
+    
     <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">CREAR</a>
 
     <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">

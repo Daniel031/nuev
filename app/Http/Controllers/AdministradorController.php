@@ -2,32 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nutricionista;
-use App\Models\Paciente;
+use App\Models\Administrador;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 
-class NutricionistaController extends Controller
+class AdministradorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct(){
-        // $this->middleware('auth');//?
-
-       $this->middleware('can:nutricionistas.index')->only('index');
-        $this->middleware('can:nutricionistas.create')->only('create', 'store');
-        $this->middleware('can:nutricionistas.edit')->only('edit', 'update');
-        $this->middleware('can:nutricionistas.destroy')->only('destroy');
-    }
     public function index()
     {
-        $nutricionistas = Nutricionista::all();
+        $administradors = Administrador::all();
         $personas = Persona::all();
-        return view('nutricionista.index',compact('nutricionistas','personas'));
+        // return $administradors;
+        return view('administrador.index',compact('administradors','personas'));
     }
 
     /**
@@ -37,8 +28,9 @@ class NutricionistaController extends Controller
      */
     public function create()
     {
-        // $personas = Persona::all();
-        return view('nutricionista.create');
+        $administradors = Administrador::all();
+        $personas = Persona::all();
+        return view('administrador.create',compact('administradors','personas'));
     }
 
     /**
@@ -56,14 +48,14 @@ class NutricionistaController extends Controller
         $persona->fechaNacimiento = $request->get('fechaNacimiento');
         $persona->sexo = $request->get('sexo');
         $persona->celular = $request->get('celular');
+        $persona->tipo = 'A';
         $persona->save();
 
-        $paciente = new Nutricionista();
-        $paciente->id=$persona->id;
-        $paciente->profesion = $request->get('profesion');
+        $administradors = new Administrador();
+        $administradors->id=$persona->id;
+        $administradors->save();
+        return redirect()->route('administradors.index');
 
-        $paciente->save();
-        return redirect()->route('nutricionistas.index');
     }
 
     /**
@@ -83,10 +75,10 @@ class NutricionistaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nutricionista $nutricionista)
+    public function edit(Administrador $administrador)
     {
         $personas = Persona::all();
-        return view('nutricionista.edit',compact('nutricionista','personas'));
+        return view('administrador.edit',compact('administrador','personas'));
     }
 
     /**
@@ -96,9 +88,9 @@ class NutricionistaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Nutricionista $nutricionista)
+    public function update(Request $request, Administrador $administrador)
     {
-        $persona = Persona::all()->where('id',$nutricionista->id)->first();
+        $persona = Persona::all()->where('id',$administrador->id)->first();
         $persona->ci = $request->get('ci');
         $persona->nombres = $request->get('nombres');
         $persona->apellidos= $request->get('apellidos');
@@ -107,11 +99,9 @@ class NutricionistaController extends Controller
         $persona->celular = $request->get('celular');
         $persona->save();
 
-        $nutricionista->id=$persona->id;
-        $nutricionista->profesion = $request->get('profesion');
-
-        $nutricionista->save();
-        return redirect()->route('nutricionistas.index');
+        $administrador->id=$persona->id;
+        $administrador->save();
+        return redirect()->route('administradors.index');
     }
 
     /**
@@ -120,12 +110,12 @@ class NutricionistaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nutricionista $nutricionista)
+    public function destroy(Administrador $administrador)
     {
-        $persona = Persona::all()->where('id',$nutricionista->id)->first();
-        $nutricionista->delete();
+        $persona = Persona::all()->where('id',$administrador->id)->first();
+        $administrador->delete();
         $persona->delete();
 
-        return redirect()->route('nutricionistas.index');
+        return redirect()->route('administradors.index');
     }
 }
