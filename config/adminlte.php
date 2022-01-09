@@ -281,6 +281,16 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Suscripcion',
+            'url'  => 'suscripcions',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Suscriptores',
+            'url'  => 'suscripcionUsuarios',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'tipo de medida',
             'url'  => 'tipoMedida',
             'icon' => 'fas fa-fw fa-user',
