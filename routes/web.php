@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\ControlController;
@@ -29,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/quienes',[App\Http\Controllers\HomeController::class,'quienesSomos'])->name('quienes');
+Route::get('/listaNutricionista',[App\Http\Controllers\HomeController::class,'listaN'])->name('lista');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

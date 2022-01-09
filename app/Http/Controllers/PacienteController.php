@@ -32,8 +32,8 @@ class PacienteController extends Controller
     {
         $pacientes = Paciente::all();
         $personas = Persona::all();
-        $image=Images::all();
-        return view('paciente.index', compact('pacientes', 'image', 'personas'));
+        $images=Images::all();
+        return view('paciente.index', compact('pacientes', 'images', 'personas'));
         //return $pacientes->last()->persona->image;
     }
 

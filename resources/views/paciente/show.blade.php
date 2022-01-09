@@ -105,6 +105,8 @@
 
                 <a href="" class="button is-danger is-outlined col-md-6" style="height: 80px">Grupo Plan Alimenticio</a>
 
+                <a href="" class="button is-danger is-outlined col-md-6" style="height: 80px">Actividad</a>
+
             </div>
         </div>
     </div>
