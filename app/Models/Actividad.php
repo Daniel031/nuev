@@ -10,8 +10,7 @@ class Actividad extends Model
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function controls()
-    {
-        return $this->belongsToMany(Control::class);
+    public function actividadControls(){
+        return $this->hasMany(ActividadControls::class);
     }
 }
