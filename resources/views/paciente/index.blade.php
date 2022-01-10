@@ -33,7 +33,16 @@
                     <td>{{ $paciente->persona->apellidos }}</td>
                     <td>{{ $paciente->persona->celular }}</td>
                     <td>
-                       
+                            @if ($personas->find($paciente->id)->image == null)
+                                    <img id="picture"
+                                        src="https://www.ver.bo/wp-content/uploads/2019/01/4b463f287cd814216b7e7b2e52e82687.png_1805022883.png" width="100px">
+                            @else
+                            @php
+                                $image=$images->where('imageable_id','=',$paciente->id)->first();
+                            @endphp
+                                    <img id="picture" src="{{ Storage::url($image->url) }}"
+                                        class="img-responsive img-thumbnail is-centered" style="width: 100px; height: 100px" >
+                            @endif
                     </td>
                     <td>
 
@@ -42,7 +51,7 @@
                             <a href="{{ route('paciente.show', compact('paciente')) }}" style="color:gray"><i
                                     class="fas fa-eye fa-2x px-2"></i></a>
                             <a href="{{ route('paciente.edit', compact('paciente')) }}" style="color:blue""><i
-                                            class="  fas fa-edit fa-2x px-2"></i></a>
+                                                class="   fas fa-edit fa-2x px-2"></i></a>
 
                             @csrf
                             <!--metodo para añadir token a un formulario-->

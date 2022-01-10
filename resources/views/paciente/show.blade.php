@@ -101,9 +101,11 @@
         <div class="card col-12">
             <div class="row" style="height: 80px">
 
-                <a href="{{route('paciente.perfil',compact('paciente'))}}" class="button is-warning col-md-6" style="height: 80px">Perfil Usuario</a>
+                <a href="{{route('paciente.perfil',compact('paciente'))}}" class="button is-warning col-md-4" style="height: 80px">Perfil Usuario</a>
 
-                <a href="" class="button is-danger is-outlined col-md-6" style="height: 80px">Grupo Plan Alimenticio</a>
+                <a href="" class="button is-danger is-outlined col-md-4" style="height: 80px">Grupo Plan Alimenticio</a>
+
+                <a href="{{route('paciente.actividad',compact('paciente'))}}" class="button is-dark is-outlined col-md-4" style="height: 80px">Actividad</a>
 
             </div>
         </div>
