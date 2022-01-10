@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <a href="" class="btn btn-primary">Actividad Paciente</a>
+            <a href="{{route('paciente.actividadCreate',compact('paciente'))}}" class="btn btn-primary">Actividad Paciente</a>
         </div>
         <div class="card-body">
             <table class="table table-success table-striped">
@@ -30,7 +30,6 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-
 
                 <tbody>
 

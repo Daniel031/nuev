@@ -311,8 +311,6 @@ return [
             'url'  => 'unidadMedida',
         ],
 
-
-        ['header' => 'labels'],
         ['header' => 'FUNCIONALIDADES'],
         [
             'text'       => 'Actividad',
