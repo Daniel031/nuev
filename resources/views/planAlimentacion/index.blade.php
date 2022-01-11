@@ -23,7 +23,8 @@
 </label>
 <br>
 <a href=" {{ route('paciente.tratamiento.planAlimentacion.create',compact('paciente','tratamiento')) }} " class="btn btn-primary mb-4">CREAR</a>
-
+<a href=" {{ route('paciente.tratamiento.index',compact('paciente')) }} " class="btn btn-secondary mb-4">ATRAS</a>
+<a href=" {{ route('paciente.show',compact('paciente')) }} " class="btn btn-success mb-4">VOLVER A PACIENTE</a>
 <br>
 <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
 <thead class="bg-dark text-white">

@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <form action="{{ route('tratamientos.store') }}" method="POST">
+    <form action="{{ route('paciente.tratamiento.store',compact('paciente')) }}" method="POST">
         <div class="form-group">
             <label for="ci">Objetivo clínico</label>
             <input type="text" class="form-control" id="ci" name="objetivo" placeholder="objetivos esperados" required>
@@ -25,18 +25,16 @@
             <input type="number" class="form-control" id="apellidos" name="costo" placeholder="0.00 bs" required>
         </div>
         <div class="">
-            <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Paciente</label>
-            <select class="form-control" aria-label=".form-select-sm example" name="paciente_id">
-                <option value="">Escoger paciente</option>
-                @foreach ($personas as $persona)
-                    <option value="{{ $persona->id }}"> {{ $persona->nombres }} {{ $persona->apellidos }}</option>
-                @endforeach
+            <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Estado</label>
+            <select class="form-control" aria-label=".form-select-sm example" name="activo">
+                    <option value="true">Activo </option>
+                    <option value="false">Inactivo </option>
             </select>
         </div>
         <div>
             <br>
-            <a href="{{ url()->previous() }}" class="btn btn-danger mb-4">Cancelar</a>
-            <button class="btn btn-primary mb-4" type="submit">Guardar</button>
+            <a href="{{route('paciente.tratamiento.index',$paciente)}}" class="btn btn-danger mb-4">Cancelar</a>
+            <input class="btn btn-primary mb-4" type="submit" value="Guardar">
             @csrf
             @method('post')
         </div>

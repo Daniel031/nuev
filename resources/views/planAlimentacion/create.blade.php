@@ -15,7 +15,13 @@
     <label for="NumeroDeSemanas">Numero de semanas </label>
     <input type="number"  class="form-control" id="numeroDeSemanas" name = "numeroDeSemanas" placeholder="numero de semanas" required value = 1>
 </div>
-
+<div class="form-group">
+    <form action="">
+        <a href="" type="button" class="btn btn-secondary" onclick="add()">CREAR GRUPO</a>
+        <input type="button" class="btn btn-primary" value="GUARDAR TODO">
+        <a href="{{route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento'))}}" type="button" class="btn btn-danger">CANCELAR</a>
+    </form>
+</div>
 
 
 
@@ -27,7 +33,7 @@
       </style>
       
 
-        <div id="inner">
+<div id="inner">
 
 
           <div class="t">
@@ -42,11 +48,60 @@
                  <TBODY>
                         <tr>
                              <td>
-                 
-                 
-         
+                                Lunes
+                             </td>
+                             <td>
+                                <input type="checkbox" id = 0>
                              </td>
                         </tr>
+                        <tr>
+                            <td>
+                               Martes
+                            </td>
+                            <td>
+                               <input type="checkbox" id = 1>
+                            </td>
+                       </tr>
+                       <tr>
+                        <td>
+                           Miercoles
+                        </td>
+                        <td>
+                           <input type="checkbox" id = 2>
+                        </td>
+                   </tr>
+                   <tr>
+                    <td>
+                       Jueves
+                    </td>
+                    <td>
+                       <input type="checkbox" id = 3>
+                    </td>
+               </tr>
+               <tr>
+                <td>
+                   Viernes
+                </td>
+                <td>
+                   <input type="checkbox" id =4>
+                </td>
+           </tr>
+           <tr>
+            <td>
+               Sabado
+            </td>
+            <td>
+               <input type="checkbox" id = 5>
+            </td>
+       </tr>
+       <tr>
+        <td>
+           Domingo
+        </td>
+        <td>
+           <input type="checkbox" id =6>
+        </td>
+   </tr>
                  </TBODY>
             </table>
           </div>
@@ -62,9 +117,7 @@
                  <TBODY>
                         <tr>
                              <td>
-                 
-                 
-         
+                 Todos los dias
                              </td>
                         </tr>
                  </TBODY>
@@ -72,11 +125,7 @@
           </div>
  
           </table>
-        </div>
-
-
-
-
+</div>
 
 
 
@@ -102,4 +151,18 @@
             });
         });
     </script>
+<script language="javascript">
+ 
+    var x =1;
+    function add(){
+    if (vector==null)    
+    var vector=[];
+     vector.push(x);
+     x++;
+     alert(vector);
+    }
+    
+    </script>    
+    
+    
 @stop

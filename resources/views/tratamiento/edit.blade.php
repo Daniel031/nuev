@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <form action="{{ route('tratamientos.update', compact('tratamiento')) }}" method="POST">
+    <form action="{{ route('paciente.tratamiento.update', compact('paciente','tratamiento')) }}" method="POST">
 
         <div class="form-group">
             <label for="ci">Objetivo clínico</label>
@@ -30,14 +30,17 @@
                 value="{{ $tratamiento->costo }}">
         </div>
         <div class="">
-            <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Paciente</label>
-            <select class="form-control" aria-label=".form-select-sm example" name="paciente_id">
-                <option value="{{ $tratamiento->paciente_id }}">Mantener Paciente</option>
-                @foreach ($personas as $persona)
-                    <option value="{{ $persona->id }}"> {{ $persona->nombres }} {{ $persona->apellidos }}</option>
-                @endforeach
+            <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Estado</label>
+            <select class="form-control" aria-label=".form-select-sm example" name="activo">
+                @if ($tratamiento->activo)
+                <option value="true" selected>Activo </option>
+                <option value="false">Inactivo </option>
+                @else
+                <option value="true">Activo </option>
+                <option value="false" selected>Inactivo </option>
+                @endif
+
             </select>
-            <br>
         </div>
         <div class="">
             <label class="control-label col-md-2 col-sm-3 col-xs-12" for="">Estado</label>
@@ -51,7 +54,7 @@
             </select>
         </div>
         <br>
-        <a href="{{ url()->previous() }}" class="btn btn-danger mb-4">Cancelar</a>
+        <a href="{{ route('paciente.tratamiento.index',compact('paciente'))}}" class="btn btn-danger mb-4">Cancelar</a>
         <button class="btn btn-primary mb-4" type="submit">Guardar</button>
         @csrf
         @method('put')
