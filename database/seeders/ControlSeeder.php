@@ -18,21 +18,25 @@ class ControlSeeder extends Seeder
             [
                 'fecha' => '22-09-2021',
                 'tipo_control' => 'true',
+                'cumplido'=>'true',
                 'tratamiento_id' => 1,
             ],
             [
                 'fecha' => '02-10-2021',
                 'tipo_control' => 'true',
+                'cumplido'=>'true',
                 'tratamiento_id' => 1,
             ],
             [
                 'fecha' => '13-10-2021',
                 'tipo_control' => 'true',
+                'cumplido'=>'false',
                 'tratamiento_id' => 2,
             ],
             [
                 'fecha' => '23-10-2021',
                 'tipo_control' => 'true',
+                'cumplido'=>'false',
                 'tratamiento_id' => 2,
             ],
         ]);

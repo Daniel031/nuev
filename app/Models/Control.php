@@ -9,10 +9,10 @@ class Control extends Model
 {
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
-//relación de muchos a muchos
-    public function actividads()
+//relación de uno a muchos
+    public function actividadControls()
     {
-        return $this->belongsToMany(Actividad::class);
+        return $this->hasMany(ActividadControls::class);
     }
 //relación de muchos a muchos
     public function medidas()

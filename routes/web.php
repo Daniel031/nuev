@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\ControlActividadController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\NutricionistaController;
@@ -32,13 +34,17 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/quienes',[App\Http\Controllers\HomeController::class,'quienesSomos'])->name('quienes');
+Route::get('/listaNutricionista',[App\Http\Controllers\HomeController::class,'listaN'])->name('lista');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 Route::group(['middleware' => 'auth'], function () { //si no esta logueado me manda a loguearme
     Route::resource('paciente', PacienteController::class);
-    Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'perfil'])->name('paciente.perfil');
+    Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
+
+    Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'edit'])->name('paciente.perfil');
     Route::resource('profile', ProfileController::class);
     Route::resource('consulta', ConsultaController::class);
     Route::resource('unidadMedida', UnidadMedidaController::class);

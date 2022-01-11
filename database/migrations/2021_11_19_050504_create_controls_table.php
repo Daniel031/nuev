@@ -15,8 +15,9 @@ class CreateControlsTable extends Migration
     {
         Schema::create('controls', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fecha');
-            $table->boolean('tipo_control');
+            $table->date('fecha');
+            $table->boolean('tipo_control');//si es true es una actividad, si es false es una medición
+            $table->boolean('cumplido')->nullable();//si es true la actividad ha sido cumplido, false si no ha sido cumplido por el paciente
             $table->foreignId('tratamiento_id')->references('id')->on('tratamientos')
                 ->onUpdate('cascade')->onDelete('cascade');
 
