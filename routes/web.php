@@ -15,7 +15,9 @@ use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\Tipo_medidaController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
+use App\Http\Controllers\PacienteConsultaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ConsultorioController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanAlimentacionController;
 use Illuminate\Support\Facades\Route;
@@ -61,4 +63,8 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('administradors', AdministradorController::class);
     Route::resource('suscripcions', SuscripcionController::class);
     Route::resource('suscripcionUsuarios', Suscripcion_usuarioController::class);
+    Route::resource('paciente.consulta', PacienteConsultaController::class);
+
+    Route::resource('consultorio', ConsultorioController::class);
+
 });

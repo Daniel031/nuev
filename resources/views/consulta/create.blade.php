@@ -37,7 +37,29 @@
                 @endforeach
 
             </select>
+        </div>         
+        
+        <div class="form-group">
+            <label for="fecha_hora">Fecha y hora</label>
+            <input type="datetime-local" class="form-control" id="fecha_hora" name="fecha_hora" placeholder="fecha y hora de consulta"
+                required>
         </div>
+        <div class="form-group">
+            <label for="tiempoDeConsulta">Tiempo de Consulta </label>
+            <input type="time" class="form-control" id="tiempoDeConsulta" name="tiempoDeConsulta" placeholder="tiempo de consulta"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="paciente">Consultorio</label>
+            <select class="form-control" id="consultorio_id" name="consultorio_id">
+                @foreach ($consultorios as $consultorio)
+                    <option value={{ $consultorio->id }}>
+                        {{ $consultorio->nombre }}
+                    </option>
+                @endforeach
+
+            </select>
+        </div>    
 
         <a href="{{ route('consulta.index') }}" class="btn btn-danger mb-4">Cancelar</a>
         <button class="btn btn-primary mb-4" type="submit">Guardar</button>

@@ -10,8 +10,9 @@ use App\Models\Consultorio;
 use App\Models\ConsultaNutricionista;
 use Auth;
 
-class ConsultaController extends Controller
+class PacienteConsultaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -26,14 +27,14 @@ class ConsultaController extends Controller
         $this->middleware('can:consulta.destroy')->only('destroy');
     }
 
-    public function index()
+    public function index(Paciente $paciente)
     {
-        $consultas = Consulta::all();
+        $consultas = Consulta::all()->where('paciente_id',$paciente->id);
         $personas =Persona::all();
         $pacientes = Paciente::all();
         $consultorios =Consultorio::all();
 
-        return view('consulta.index',compact('consultorios','consultas','personas','pacientes'));
+        return view('pacienteConsulta.index',compact('paciente','consultorios','consultas','personas','pacientes'));
     }
 
     /**
@@ -41,12 +42,12 @@ class ConsultaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Paciente $paciente)
     {
         $consultorios =Consultorio::all();
         $pacientes = Paciente::all();
         $personas = Persona::all();
-        return view('consulta.create',compact('consultorios','pacientes','personas'));
+        return view('pacienteConsulta.create',compact('paciente','consultorios','pacientes','personas'));
     }
 
     /**
@@ -55,14 +56,14 @@ class ConsultaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Paciente $paciente)
     {            
         
         $consulta = new Consulta();
         $consulta->confirmada = $request->confirmada;
         $consulta->motivoConsulta = $request->motivoConsulta;
         $consulta->expectativa = $request->expectativa;
-        $consulta->paciente_id = $request->paciente_id;
+        $consulta->paciente_id = $paciente->id;
         $consulta->save();
 
         $consultaNut=new ConsultaNutricionista();
@@ -73,7 +74,7 @@ class ConsultaController extends Controller
         $consultaNut->consulta_id=$consulta->id;
         $consultaNut->save();
 
-        return redirect()->route('consulta.index');
+        return redirect()->route('paciente.consulta.index',compact('paciente'));
     }
 
     /**
@@ -93,7 +94,7 @@ class ConsultaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Consulta $consultum)
+    public function edit(Paciente $paciente,Consulta $consultum)
     {
         $pacientes = Paciente::all();
         $personas = Persona::all();
@@ -101,7 +102,7 @@ class ConsultaController extends Controller
         $consultorios = Consultorio::all();
         $consultasNutricionistas=ConsultaNutricionista::all();
         
-        return view('consulta.edit',compact('consultorios','pacientes','personas','consulta','consultasNutricionistas'));
+        return view('pacienteConsulta.edit',compact('paciente','consultorios','pacientes','personas','consulta','consultasNutricionistas'));
     }
 
     /**
@@ -111,7 +112,7 @@ class ConsultaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Consulta $consultum)
+    public function update(Request $request,Paciente $paciente,Consulta $consultum)
     {
         $consulta=$consultum;
         $consulta->confirmada = $request->confirmada;
@@ -128,7 +129,7 @@ class ConsultaController extends Controller
         $consultaNut->consulta_id=$consulta->id;
         $consultaNut->save();
 
-        return redirect()->route('consulta.index');
+        return redirect()->route('paciente.consulta.index',compact('paciente'));
     }
 
     /**
@@ -137,9 +138,9 @@ class ConsultaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Consulta $consultum)
+    public function destroy(Paciente $paciente,Consulta $consultum)
     {
         $consultum->delete();
-        return redirect()->route('consulta.index');
+        return redirect()->route('paciente.consulta.index',compact('paciente'));
     }
 }

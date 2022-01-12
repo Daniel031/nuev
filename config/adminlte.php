@@ -305,7 +305,11 @@ return [
             'text' => ' Unidad de medida',
             'url'  => 'unidadMedida',
         ],
-
+        [
+            'icon' =>' fas fa-home',
+            'text' => ' Consultorio',
+            'url'  => 'consultorio',
+        ],
 
         ['header' => 'labels'],
         ['header' => 'FUNCIONALIDADES'],

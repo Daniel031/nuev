@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
     <form action="">
-        <a href="" type="button" class="btn btn-secondary" onclick="add()">CREAR GRUPO</a>
+        <a href="" type="button" class="btn btn-secondary" onclick="crearGrupo()">CREAR GRUPO</a>
         <input type="button" class="btn btn-primary" value="GUARDAR TODO">
         <a href="{{route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento'))}}" type="button" class="btn btn-danger">CANCELAR</a>
     </form>
@@ -107,7 +107,7 @@
           </div>
 
           <div class="t">
-            <table  class="table table-striped table-bordered shadow-lg mt-3">
+            <table id ="dias" class="table table-striped table-bordered shadow-lg mt-3">
                 <thead class="bg-dark text-white">
         
                     <tr>
@@ -152,17 +152,46 @@
         });
     </script>
 <script language="javascript">
- 
-    var x =1;
-    function add(){
-    if (vector==null)    
-    var vector=[];
-     vector.push(x);
-     x++;
-     alert(vector);
+
+function crearGrupo(){
+
+    var tabla = document.getElementById('dias');
+    var tbody = tabla.getElementsByTagName('TBODY');
+    var tr =document.createElement('tr');
+    var td =document.createElement('td');
+
+
+    td.appendChild(document.createTextNode("Lunes")); 
+
+    tr.appendChild(td);
+    alert('Error');
+    tbody.appendChild(tr);
+
+alert('Error');
+
     }
-    
-    </script>    
+   /* function load() {
+    var blah="Blah!";
+   // var t  = document.createElement("table"),
+   // tb = document.createElement("tbody"),
+   // tr = document.createElement("tr"),
+   // td = document.createElement("td");
+
+    t.style.width = "100%";
+    t.style.borderCollapse = 'collapse';
+
+    td.appendChild(document.createTextNode(blah)); 
+
+    // note the reverse order of adding child        
+    tr.appendChild(td);
+    tb.appendChild(tr);
+    t.appendChild(tb);
+
+   document.getElementById("theBlah").appendChild(t);
+}
+*/
+
+</script>    
     
     
 @stop

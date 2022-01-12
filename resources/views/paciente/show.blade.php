@@ -90,7 +90,7 @@
 
                 <a href="" class="button is-success col-md-4" style="height: 80px">Plan Alimentacion</a>
 
-                <a href="" class="button is-link col-md-4" style="height: 80px">Generar Consulta</a>
+                <a href="{{route('paciente.consulta.index',compact('paciente'))}}" class="button is-link col-md-4" style="height: 80px">Consultas</a>
 
                 <a href="" class="button is-primary col-md-4" style="height: 80px">Historial Clínico</a>
 
