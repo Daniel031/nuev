@@ -45,6 +45,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => 'auth'], function () { //si no esta logueado me manda a loguearme
     Route::resource('paciente', PacienteController::class);
     Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
+    Route::get('paciente/create/actividad/{paciente}',[ControlActividadController::class,'create'])->name('paciente.actividadCreate');
+    Route::post('paciente/create/actividad/{paciente}',[ControlActividadController::class,'store'])->name('paciente.actividadStore');
 
     Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'edit'])->name('paciente.perfil');
     Route::resource('profile', ProfileController::class);

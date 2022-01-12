@@ -18,19 +18,20 @@
                 </div>
             </div>
 
-            <a href="" class="btn btn-primary">Actividad Paciente</a>
+            <a href="{{route('paciente.actividadCreate',compact('paciente'))}}" class="btn btn-primary">Actividad Paciente</a>
         </div>
         <div class="card-body">
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th>Fecha Registrada</th>
                         <th>Estado</th>
-                        <th>Gasto Energético</th>
+                        <th>Veces a la semana</th>
+                        <th>Gasto Energético diario</th>
+                        <th>Gasto Energético total</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
-
 
                 <tbody>
 
@@ -46,7 +47,10 @@
                                 @endif
 
                             </td>
-                            <td>3</td>
+
+                            <td>{{$control->cantidadSemanal}}</td>
+                            <td>{{$control->gastoActividad}}</td>
+                            <td>{{$control->gastoActividad*$control->cantidadSemanal}}</td>
                             <td>
                                 <a href="" class="btn btn-primary"><i class="fas fa-eye fa-2x px-2"></i></a>
 
