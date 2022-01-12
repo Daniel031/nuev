@@ -16,11 +16,15 @@ class CreateControlsTable extends Migration
         Schema::create('controls', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->boolean('tipo_control');//si es true es una actividad, si es false es una medición
-            $table->boolean('cumplido')->nullable();//si es true la actividad ha sido cumplido, false si no ha sido cumplido por el paciente
-            $table->foreignId('tratamiento_id')->references('id')->on('tratamientos')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('tipo_control'); //si es true es una actividad, si es false es una medición
+            $table->boolean('cumplido')->nullable(); //si es true la actividad ha sido cumplido, false si no ha sido cumplido por el paciente
 
+            $table->unsignedInteger('cantidadSemanal');
+
+            $table->decimal('promedioDiario', 8, 2)->nullable();
+            $table->decimal('gastoActividad', 8, 2)->nullable(); //gasto total de toda la actividad
+            $table->foreignId('tratamiento_id')->references('id')->on('tratamientos')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
