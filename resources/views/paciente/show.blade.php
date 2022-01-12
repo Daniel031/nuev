@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    <div class="row" style="heig">
+    <div class="row" >
         <div class="card col-12">
             <div class="row" style="height: 80px">
 

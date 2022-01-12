@@ -15,6 +15,7 @@ class CreateHistoriaClinicasTable extends Migration
     {
         Schema::create('historia_clinicas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedDecimal('peso',8,2)->nullable();
             $table->text('descripcionPatologia')->nullable();
             $table->text('medicamentos')->nullable();
             $table->text('antecedentePersonal')->nullable();
@@ -22,7 +23,7 @@ class CreateHistoriaClinicasTable extends Migration
             $table->text('otraInformacion')->nullable();
             $table->foreignId('paciente_id')->references('id')->on('pacientes')
             ->onUpdate('cascade')->onDelete('cascade');
-            
+
 
             $table->timestamps();
         });

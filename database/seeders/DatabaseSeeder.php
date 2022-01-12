@@ -41,5 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TratamientoSeeder::class);
         $this->call(ControlSeeder::class);
         $this->call(ActividadSeeder::class);
+        $this->call(HistoriaClinicaSeeder::class);
     }
 }

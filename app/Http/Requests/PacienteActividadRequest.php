@@ -24,21 +24,22 @@ class PacienteActividadRequest extends FormRequest
     public function rules()
     {
         return [
-            'cantidadSemanal' => 'required',
-            'tiempoDiario' => 'required',
-            'promedioDiario' => '',
-            'gastoActividad' => '',
-            'fechaHora_establecida' => 'required',
-            'fechaHora_cumplida' => 'required',
+            'fecha' => 'required',
+            'actividad' => 'required',
+            'veces' => 'required',
+            'tiempo' => '',
+            'tiempoh' => '',
+            'Radio' => 'required',
+            'promedio' => 'required',
+            'total' => 'required',
+            'json' => '',
         ];
     }
     public function messages()
     {
         return [
-            'cantidadSemanal' => 'El campo cantidad semanal es requerido',
-            'tiempoDiario' => 'El campo tiempo Diario es requerido',
-            'fechaHora_establecida' => 'required',
-            'fechaHora_cumplida' => 'required',
+            'fecha' => 'rellene el campo fecha',
+            'veces' => 'rellene el campo veces',
         ];
     }
 }
