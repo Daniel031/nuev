@@ -17,26 +17,26 @@ class ControlSeeder extends Seeder
         $controls = ([
             [
                 'fecha' => '2021-09-22',
-                'tipo_control' => 'true',
-                'cumplido'=>'true',
+                'tipo_control' => true,
+                'cumplido'=>true,
                 'tratamiento_id' => 1,
             ],
             [
                 'fecha' => '2021-02-10',
-                'tipo_control' => 'true',
-                'cumplido'=>'true',
+                'tipo_control' => true,
+                'cumplido'=>true,
                 'tratamiento_id' => 1,
             ],
             [
                 'fecha' => '2021-10-13',
-                'tipo_control' => 'true',
-                'cumplido'=>'false',
+                'tipo_control' => true,
+                'cumplido'=>false,
                 'tratamiento_id' => 2,
             ],
             [
                 'fecha' => '2021-10-23',
-                'tipo_control' => 'true',
-                'cumplido'=>'false',
+                'tipo_control' => true,
+                'cumplido'=>false,
                 'tratamiento_id' => 2,
             ],
         ]);

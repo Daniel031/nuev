@@ -29,7 +29,10 @@
                 </th>
             </tr>
         </thead>
+   
+       
         <thead class="bg-dark text-white">
+            
 
             <tr>
                 <th scope="col">CI</th>
