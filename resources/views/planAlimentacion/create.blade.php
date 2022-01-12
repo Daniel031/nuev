@@ -7,6 +7,9 @@
 @stop
 
 @section('content')
+
+<form action="{{route('paciente.tratamiento.planAlimentacion.store',compact('paciente','tratamiento'))}}" method="POST"  >
+
 <div class="form-group">
     <label for="fechaInicio">Fecha de inicio </label>
     <input type="date"  class="form-control" id="fechaInicio" name = "fechaInicio" placeholder="Fecha de Inicio" required>
@@ -16,14 +19,19 @@
     <input type="number"  class="form-control" id="numeroDeSemanas" name = "numeroDeSemanas" placeholder="numero de semanas" required value = 1>
 </div>
 <div class="form-group">
-    <form action="">
-        <a href="" type="button" class="btn btn-secondary" onclick="crearGrupo()">CREAR GRUPO</a>
-        <input type="button" class="btn btn-primary" value="GUARDAR TODO">
-        <a href="{{route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento'))}}" type="button" class="btn btn-danger">CANCELAR</a>
-    </form>
+    <label for="Estado">Estado </label>
+    <select class="form-control" id="activo" name="activo">
+            <option value="true">Activo
+            </option>
+            <option value="false"> Inactivo
+            </option>
+    </select>
 </div>
 
-
+@csrf
+@method('post')
+        <button type="submit" class="btn btn-primary">GUARDAR</button>
+        <a href="{{route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento'))}}" type="button" class="btn btn-danger">CANCELAR</a>
 
 
     <style>
@@ -51,7 +59,7 @@
                                 Lunes
                              </td>
                              <td>
-                                <input type="checkbox" id = 0>
+                                <input type="checkbox" id = "numero1" name="dia[]" value ="1">
                              </td>
                         </tr>
                         <tr>
@@ -59,7 +67,7 @@
                                Martes
                             </td>
                             <td>
-                               <input type="checkbox" id = 1>
+                               <input type="checkbox" id ="numero2" name="dia[]" value ="2">
                             </td>
                        </tr>
                        <tr>
@@ -67,7 +75,7 @@
                            Miercoles
                         </td>
                         <td>
-                           <input type="checkbox" id = 2>
+                           <input type="checkbox" id = "numero3" name="dia[]" value ="3">
                         </td>
                    </tr>
                    <tr>
@@ -75,7 +83,7 @@
                        Jueves
                     </td>
                     <td>
-                       <input type="checkbox" id = 3>
+                       <input type="checkbox" id = "numero4" name="dia[]" value="4">
                     </td>
                </tr>
                <tr>
@@ -83,7 +91,7 @@
                    Viernes
                 </td>
                 <td>
-                   <input type="checkbox" id =4>
+                   <input type="checkbox" id ="numero5" name="dia[]" value="5">
                 </td>
            </tr>
            <tr>
@@ -91,7 +99,7 @@
                Sabado
             </td>
             <td>
-               <input type="checkbox" id = 5>
+               <input type="checkbox" id = "numero6" name="dia[]" value="6">
             </td>
        </tr>
        <tr>
@@ -99,27 +107,9 @@
            Domingo
         </td>
         <td>
-           <input type="checkbox" id =6>
+           <input type="checkbox" id ="numero7" name="dia[]" value="7">
         </td>
    </tr>
-                 </TBODY>
-            </table>
-          </div>
-
-          <div class="t">
-            <table id ="dias" class="table table-striped table-bordered shadow-lg mt-3">
-                <thead class="bg-dark text-white">
-        
-                    <tr>
-                     <th scope="col">Dias del grupo</th>
-                    </tr>
-                 </thead>
-                 <TBODY>
-                        <tr>
-                             <td>
-                 Todos los dias
-                             </td>
-                        </tr>
                  </TBODY>
             </table>
           </div>
@@ -128,7 +118,7 @@
 </div>
 
 
-
+</form>
 @stop
 
 @section('css')
@@ -151,47 +141,6 @@
             });
         });
     </script>
-<script language="javascript">
-
-function crearGrupo(){
-
-    var tabla = document.getElementById('dias');
-    var tbody = tabla.getElementsByTagName('TBODY');
-    var tr =document.createElement('tr');
-    var td =document.createElement('td');
-
-
-    td.appendChild(document.createTextNode("Lunes")); 
-
-    tr.appendChild(td);
-    alert('Error');
-    tbody.appendChild(tr);
-
-alert('Error');
-
-    }
-   /* function load() {
-    var blah="Blah!";
-   // var t  = document.createElement("table"),
-   // tb = document.createElement("tbody"),
-   // tr = document.createElement("tr"),
-   // td = document.createElement("td");
-
-    t.style.width = "100%";
-    t.style.borderCollapse = 'collapse';
-
-    td.appendChild(document.createTextNode(blah)); 
-
-    // note the reverse order of adding child        
-    tr.appendChild(td);
-    tb.appendChild(tr);
-    t.appendChild(tb);
-
-   document.getElementById("theBlah").appendChild(t);
-}
-*/
-
-</script>    
     
     
 @stop

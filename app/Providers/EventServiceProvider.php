@@ -9,6 +9,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Models\AlimentoRecetas;
 use App\Observers\AlimentoRecetasObserver;
+use App\Models\DiaGrupo;
+use App\Observers\DiaGrupoObserver;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -30,5 +32,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         AlimentoRecetas::observe(AlimentoRecetasObserver::class);
+        DiaGrupo::observe(DiaGrupoObserver::class);
     }
 }

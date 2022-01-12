@@ -33,6 +33,7 @@
     <th scope="col">ID</th>
       <th scope="col">FECHA DE INICIO</th>
       <th scope="col">FECHA FINAL</th>
+      <th scope="col">DIAS</th>
       <th scope="col">ACTIVO</th>
       <th scope="col">ACCIONES</th>
 
@@ -45,17 +46,29 @@
             <td>{{$plan->id}}</td>
             <td>{{$plan->fechaInicio}}</td>
             <td>{{$plan->fechaFin}}</td>
-            <td>{{$plan->activo}}</td>
+            <td>
+            @foreach ($diaGrupo->where('grupo_id',$grupo->where('plan_alimentacion_id',$plan->id)->first()->id) as $idDia)
+                {{$dias->where('id',$idDia->dia_id)->first()->nombre}}
+            @endforeach    
+            
+            </td>
+            @if ($plan->activo)
+            <td>Activo</td>
+            @else
+            <td>Inactivo</td>
+            @endif
+
 
             <td>
-
+@php
+$planAlimentacion = $plan;    
+@endphp
 
                 <form action="" method="POST">
-                    <a href="" class="btn btn-primary">Ver</a>
+                    <a href="{{route('paciente.tratamiento.planAlimentacion.edit',compact('paciente','tratamiento','planAlimentacion'))}}" class="btn btn-primary">Editar</a>
 
                     @csrf  <!--metodo para añadir token a un formulario-->
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Editar</button>
+                    <button type="submit" class="btn btn-danger">Ver</button>
                 </form>
             </td>
         </tr>
