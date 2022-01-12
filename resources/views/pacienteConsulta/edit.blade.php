@@ -35,15 +35,15 @@
 
         <div class="form-group">
             <label for="paciente">Paciente</label>
-            <select class="form-control" id="paciente_id" name="paciente_id">
-                @foreach ($pacientes as $paciente)
-                    @if ($paciente->id == $consulta->paciente_id)
-                        <option selected value={{ $paciente->id }}>
-                            {{ $personas->where('id', $paciente->id)->first()->nombres . ' ' . $personas->where('id', $paciente->id)->first()->apellidos }}
+            <select class="form-control" id="paciente_id" name="paciente_id"  disabled=true>
+                @foreach ($pacientes as $pacient)
+                    @if ($pacient->id == $consulta->paciente_id)
+                        <option selected value={{ $pacient->id }}>
+                            {{ $personas->where('id', $pacient->id)->first()->nombres . ' ' . $personas->where('id', $pacient->id)->first()->apellidos }}
                         </option>
                     @else
                         <option value={{ $paciente->id }}>
-                            {{ $personas->where('id', $paciente->id)->first()->nombres . ' ' . $personas->where('id', $paciente->id)->first()->apellidos }}
+                            {{ $personas->where('id', $pacient->id)->first()->nombres . ' ' . $personas->where('id', $pacient->id)->first()->apellidos }}
                         </option>
                     @endif
 
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label for="fecha_hora">Fecha y hora</label>
             <input type="datetime-local" class="form-control" id="fecha_hora" name="fecha_hora" placeholder="fecha y hora de consulta"
-                required value="{{$consultasNutricionistas->where('consulta_id',$consulta->id)->first()->fecha_hora}}T">
+                required value="{{$consultasNutricionistas->where('consulta_id',$consulta->id)->first()->fecha_hora}}">
         </div>
         <div class="form-group">
             <label for="tiempoDeConsulta">Tiempo de Consulta </label>
@@ -75,7 +75,7 @@
             </select>
         </div>    
 
-        <a href="{{ route('consulta.index') }}" class="btn btn-danger mb-4">Cancelar</a>
+        <a href="{{ route('paciente.consulta.index',compact('paciente')) }}" class="btn btn-danger mb-4">Cancelar</a>
         <button class="btn btn-primary mb-4" type="submit">Guardar</button>
         @csrf
         @method('put')

@@ -15,9 +15,15 @@ use App\Http\Controllers\SuscripcionController;
 use App\Http\Controllers\Tipo_medidaController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
+use App\Http\Controllers\PacienteConsultaController;
 use App\Http\Controllers\UserController;
+<<<<<<< HEAD
 use App\Models\Tratamiento;
+=======
+use App\Http\Controllers\ConsultorioController;
+>>>>>>> 2d81ba4140b7800bcc02b6382fb5976514d74f80
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PlanAlimentacionController;
 use Illuminate\Support\Facades\Route;
 use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facade\Excel;
@@ -48,6 +54,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () { //si no esta logueado me manda a loguearme
+<<<<<<< HEAD
+=======
+    Route::resource('paciente', PacienteController::class);
+    Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
+    Route::get('paciente/create/actividad/{paciente}',[ControlActividadController::class,'create'])->name('paciente.actividadCreate');
+    Route::post('paciente/create/actividad/{paciente}',[ControlActividadController::class,'store'])->name('paciente.actividadStore');
+>>>>>>> 2d81ba4140b7800bcc02b6382fb5976514d74f80
 
     Route::resource('/admin/paciente', PacienteController::class);
     Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
@@ -61,10 +74,17 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('tipoMedida', Tipo_medidaController::class);
     Route::resource('medida', MedidaController::class);
     Route::resource('control', ControlController::class);
+    Route::resource('paciente.tratamiento',TratamientoController::class);
+    Route::resource('paciente.tratamiento.planAlimentacion',PlanAlimentacionController::class);
+
     Route::resource('tratamientos', TratamientoController::class);
     Route::resource('administradors', AdministradorController::class);
     Route::resource('suscripcions', SuscripcionController::class);
     Route::resource('suscripcionUsuarios', Suscripcion_usuarioController::class);
+    Route::resource('paciente.consulta', PacienteConsultaController::class);
+
+    Route::resource('consultorio', ConsultorioController::class);
+
 });
 
 Route::get( '/tratamiento/generar',  [TratamientoController::class, 'generar'] );

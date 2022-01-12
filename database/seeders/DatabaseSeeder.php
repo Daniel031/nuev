@@ -41,5 +41,10 @@ class DatabaseSeeder extends Seeder
         $this->call(TratamientoSeeder::class);
         $this->call(ControlSeeder::class);
         $this->call(ActividadSeeder::class);
+        $this->call(DiaSeeder::class);
+        $this->call(ConsultorioSeeder::class);
+        $this->call(ConsultaSeeder::class);
+        $this->call(ConsultaNutricionistaSeeder::class);
+        $this->call(HistoriaClinicaSeeder::class);
     }
 }

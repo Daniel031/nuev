@@ -22,6 +22,7 @@ class TratamientoSeeder extends Seeder
                 'costo' => '2000',
                 'completo' => false,
                 'paciente_id' => 2,
+                'activo'=>'true',
             ],
             [
                 'objetivo' => 'Aumentar masa muscular',
@@ -30,6 +31,7 @@ class TratamientoSeeder extends Seeder
                 'costo' => '2200',
                 'completo' => false,
                 'paciente_id' => 3,
+                'activo'=>'false',
             ],
         ]);
         foreach ($tratamientos as $tratamiento) {

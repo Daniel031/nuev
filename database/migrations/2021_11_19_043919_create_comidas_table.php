@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTratamientosTable extends Migration
+class CreateComidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateTratamientosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tratamientos', function (Blueprint $table) {
+        Schema::create('comidas', function (Blueprint $table) {
             $table->id();
-            $table->text('objetivo');
-            $table->date('fechaInicio');
-            $table->date('fechaFin');
-            $table->decimal('costo');
-            $table->boolean('completo');
-            $table->boolean('activo');
-            $table->foreignId('paciente_id')->references('id')->on('pacientes')
+            $table->time('hora');
+            $table->string('nombre',20);
+            $table->foreignId('alimento_id')->references('id')->on('alimentos')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
@@ -34,6 +30,6 @@ class CreateTratamientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tratamientos');
+        Schema::dropIfExists('comidas');
     }
 }

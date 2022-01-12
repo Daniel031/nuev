@@ -7,14 +7,32 @@
 @stop
 
 @section('content')
+<<<<<<< HEAD
     <a href=" {{ route('tratamientos.create') }} " class="btn btn-primary mb-4">CREAR</a>
     <a href='/reportetratamientogenerar-pdf' class="btn btn-primary mb-4" target="_blank">REPORTE</a> 
+=======
+
+<label for="ci">Paciente ID: {{$paciente->id}}
+<br>            Nombre : {{$persona->where('id',$paciente->id)->first()->nombres}} {{$persona->where('id',$paciente->id)->first()->apellidos}}
+<br>            Celular: {{$persona->where('id',$paciente->id)->first()->celular}} 
+<br>
+
+
+
+
+</label>
+<br>
+<br>
+
+    <a href=" {{ route('paciente.tratamiento.create',compact('paciente')) }} " class="btn btn-primary mb-4">CREAR</a>
+    <a href=" {{ route('paciente.show',compact('paciente')) }} " class="btn btn-success mb-4">VOLVER A PACIENTE</a>
+>>>>>>> 2d81ba4140b7800bcc02b6382fb5976514d74f80
 
     <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
 
             <tr>
-                <th scope="col">PACIENTE</th>
+                <th scope="col">ID</th>
                 <th scope="col">OBJETIVO</th>
                 <th scope="col">FECHA INICIO</th>
                 <th scope="col">FECHA FIN</th>
@@ -26,33 +44,28 @@
         <TBODY>
             @foreach ($tratamientos as $tratamiento)
                 <tr>
-                    @foreach ($personas as $persona)
-                        @php
-                            if ($persona->id == $tratamiento->paciente_id) {
-                                $aux = $persona->nombres . ' ' . $persona->apellidos;
-                            }
-                        @endphp
-                    @endforeach
-                    <td>{{ $aux }}</td>
+                    <td>{{ $tratamiento->id }}</td>
 
                     <td>{{ $tratamiento->objetivo }}</td>
                     <td>{{ $tratamiento->fechaInicio }}</td>
                     <td>{{ $tratamiento->fechaFin }}</td>
                     <td>@php
-                        $aux = $tratamiento->completo == 0 ? 'en curso' : 'finalizado';
+                        $aux = $tratamiento->activo == 0 ? 'Inactivo' : 'Activo';
                     @endphp
                         {{ $aux }}</td>
 
                     <td>
-                        <form action="{{ route('tratamientos.destroy', $tratamiento) }}" method="POST">
+                        <form action="{{ route('paciente.tratamiento.destroy', compact('paciente','tratamiento')) }}" method="POST">
                             <a href="" style="color:gray" class="btn btn-primary" ><i class="fas fa-eye fa-2x px-2"></i></a>{{-- Planes del tratamiento --}}
-                            <a href="{{ route('tratamientos.edit', $tratamiento) }}" style="color:blue" class="btn btn-primary"><i class="
+                            <a href="{{ route('paciente.tratamiento.edit', compact('paciente','tratamiento')) }}" style="color:blue" class="btn btn-primary"><i class="
                                    fas fa-edit fa-2x px-2"></i></a>
 
                             @csrf
                             <!--metodo para añadir token a un formulario-->
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
+
+                            <a href="{{route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento'))}}" style="color:white" class="btn btn-secondary" >VER PLANES</a>
                         </form>
                     </td>
                 </tr>

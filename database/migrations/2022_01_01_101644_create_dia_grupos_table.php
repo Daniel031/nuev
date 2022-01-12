@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComidasTable extends Migration
+class CreateDiaGruposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateComidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('comidas', function (Blueprint $table) {
+        Schema::create('dia_grupos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',20);
+            $table->foreignId('dia_id')->references('id')->on('dias')
+            ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('grupo_id')->references('id')->on('grupos')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateComidasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comidas');
+        Schema::dropIfExists('dia_grupos');
     }
 }

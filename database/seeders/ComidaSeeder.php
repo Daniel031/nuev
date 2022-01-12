@@ -17,16 +17,27 @@ class ComidaSeeder extends Seeder
     public function run()
     {
         $comidas = ([
-            ['nombre' => 'Desayuno'],
-            ['nombre' => 'brunch'],
-            ['nombre' => 'Almuerzo'],
-            ['nombre' => 'Siesta'],
-            ['nombre' => 'Cena'],
+            ['nombre' => 'Desayuno',
+             'hora'=>'08:00',
+             'alimento_id'=>1],
+            ['nombre' => 'brunch',
+            'hora'=>'10:00',
+            'alimento_id'=>2],
+            ['nombre' => 'Almuerzo',
+            'hora'=>'12:00',
+            'alimento_id'=>3],
+            ['nombre' => 'Siesta',
+            'hora'=>'15:00',
+            'alimento_id'=>4],
+            ['nombre' => 'Cena',
+            'hora'=>'18:00',
+            'alimento_id'=>5],
         ]);
         foreach ($comidas as $c) {
             Comida::create($c);
         }
-        /*$comida=Comida::all()->first();
+        /*
+        $comida=Comida::all()->first();
         $r=Receta::all();
         $a=Alimento::all();
         $comida->recetas()->attach($r->where('nombre', '=', 'Ensalada de aguacate y naranja')->first()->id,

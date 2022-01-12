@@ -1,67 +1,59 @@
 @extends('adminlte::page')
 
-@section('title', 'EDITAR PACIENTE')
+@section('title', 'CREAR CONSULTA')
 
 @section('content_header')
-    <h1>Editar Pacientes</h1>
+    <h1>Crear Consulta</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('consulta.update', ['consultum' => $consulta]) }}" method="POST">
+    <form action="{{ route('paciente.consulta.store',compact('paciente')) }}" method="POST">
         <div class="form-group">
             <label for="motivoConsulta">Motivo de la consulta</label>
             <input type="text" class="form-control" id="motivoConsulta" name="motivoConsulta"
-                placeholder="motivo de la consulta" required value={{ $consulta->motivoConsulta }}>
+                placeholder="motivo de la consulta" required>
         </div>
         <div class="form-group">
             <label for="expectativa">Expectativa </label>
-            <input type="text" class="form-control" id="expectativa" name="expectativa" placeholder="expectativas" required
-                value={{ $consulta->expectativa }}>
+            <input type="text" class="form-control" id="expectativa" name="expectativa" placeholder="expectativas"
+                required>
         </div>
         <div class="form-group">
             <label for="confirmada">Confirmada</label>
             <select class="form-control" id="confirmada" name="confirmada">
-                @if ($consulta->confirmada == 1)
-                    <option selected value=1>Si</option>
-                    <option value=0>No</option>
-                @else
-                    <option value=1>Si</option>
-                    <option selected value=0>No</option>
-                @endif
-
+                <option value=1>Si</option>
+                <option value=0>No</option>
             </select>
         </div>
 
 
         <div class="form-group">
             <label for="paciente">Paciente</label>
-            <select class="form-control" id="paciente_id" name="paciente_id">
-                @foreach ($pacientes as $paciente)
-                    @if ($paciente->id == $consulta->paciente_id)
-                        <option selected value={{ $paciente->id }}>
-                            {{ $personas->where('id', $paciente->id)->first()->nombres . ' ' . $personas->where('id', $paciente->id)->first()->apellidos }}
-                        </option>
-                    @else
-                        <option value={{ $paciente->id }}>
-                            {{ $personas->where('id', $paciente->id)->first()->nombres . ' ' . $personas->where('id', $paciente->id)->first()->apellidos }}
-                        </option>
-                    @endif
-
+            <select class="form-control" id="paciente_id" name="paciente_id" disabled>
+                @foreach ($pacientes as $pacient)
+                @if ($pacient->id == $paciente->id)
+                <option selected value={{ $pacient->id }}>
+                    {{ $personas->where('id', $pacient->id)->first()->nombres . ' ' . $personas->where('id', $pacient->id)->first()->apellidos }}
+                </option>
+            @else
+                <option value={{ $pacient->id }}>
+                    {{ $personas->where('id', $pacient->id)->first()->nombres . ' ' . $personas->where('id', $pacient->id)->first()->apellidos }}
+                </option>
+            @endif
                 @endforeach
 
             </select>
-        </div>
-
-
+        </div>         
+        
         <div class="form-group">
             <label for="fecha_hora">Fecha y hora</label>
             <input type="datetime-local" class="form-control" id="fecha_hora" name="fecha_hora" placeholder="fecha y hora de consulta"
-                required value="{{$consultasNutricionistas->where('consulta_id',$consulta->id)->first()->fecha_hora}}T">
+                required>
         </div>
         <div class="form-group">
             <label for="tiempoDeConsulta">Tiempo de Consulta </label>
             <input type="time" class="form-control" id="tiempoDeConsulta" name="tiempoDeConsulta" placeholder="tiempo de consulta"
-                required value={{$consultasNutricionistas->where('consulta_id',$consulta->id)->first()->tiempoDeConsulta}}>
+                required>
         </div>
         <div class="form-group">
             <label for="paciente">Consultorio</label>
@@ -75,10 +67,10 @@
             </select>
         </div>    
 
-        <a href="{{ route('consulta.index') }}" class="btn btn-danger mb-4">Cancelar</a>
+        <a href="{{ route('paciente.consulta.index',compact('paciente')) }}" class="btn btn-danger mb-4">Cancelar</a>
         <button class="btn btn-primary mb-4" type="submit">Guardar</button>
         @csrf
-        @method('put')
+        @method('post')
     </form>
 
 

@@ -79,7 +79,7 @@
                     <label for="" class="px-4">Imprimir</label></a>
             </div>
             <div class="row">
-                <a href="{{url("tratamientos", $paciente->id)}}" class="btn btn-secondary col-sm py-4"><i
+                <a href="{{route("paciente.tratamiento.index", compact('paciente'))}}" class="btn btn-secondary col-sm py-4"><i
                         class="fas fa-notes-medical fa-6x"></i><label for="" class="px-4">Tratamiento</label></a>
             </div>
         </div>
@@ -90,14 +90,14 @@
 
                 <a href="" class="button is-success col-md-4" style="height: 80px">Plan Alimentacion</a>
 
-                <a href="" class="button is-link col-md-4" style="height: 80px">Generar Consulta</a>
+                <a href="{{route('paciente.consulta.index',compact('paciente'))}}" class="button is-link col-md-4" style="height: 80px">Consultas</a>
 
                 <a href="" class="button is-primary col-md-4" style="height: 80px">Historial Clínico</a>
 
             </div>
         </div>
     </div>
-    <div class="row" style="heig">
+    <div class="row" >
         <div class="card col-12">
             <div class="row" style="height: 80px">
 

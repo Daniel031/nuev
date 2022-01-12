@@ -270,11 +270,6 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Tratamiento',
-            'url'  => 'tratamientos',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
             'text' => 'Suscripcion',
             'url'  => 'suscripcions',
             'icon' => 'fas fa-fw fa-user',
@@ -310,9 +305,6 @@ return [
             'text' => ' Unidad de medida',
             'url'  => 'unidadMedida',
         ],
-
-
-        ['header' => 'labels'],
         ['header' => 'FUNCIONALIDADES'],
         [
             'text'       => 'Actividad',
