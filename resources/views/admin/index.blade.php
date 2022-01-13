@@ -13,8 +13,8 @@
     @endcan --}}
     @hasanyrole('administrador|nutricionista')
         <p> Bienvenido
-        </p>
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        </p><img src="https://labuenanutricion.com/wp-content/uploads/2020/07/cuando-debe-comer-un-ni%C3%B1o-menos-de-5.jpg"
+        alt="" width="100%" height="">
     @else
         {{-- I am not a ADMINISTRADOR... --}}
 
@@ -61,7 +61,7 @@
 @section('js')
     <script>
         console.log('Hi!');
-    </script>=======___scripts_1___>>>>>>> nuevoNutricionista
+    </script>
     @stop
 
     {{-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
