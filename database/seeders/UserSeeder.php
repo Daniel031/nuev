@@ -16,10 +16,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'=>'admin',
+            'name'=>'nutricionista',
             'email'=>'Nutridiet@gmail.com',
+            'persona_id'=>'1',
             'password'=>bcrypt('12345678'),
-        ])->assignRole(1);
+        ])->assignRole(2);
 
          User::create([
              'name'=>'Paciente',
@@ -28,10 +29,10 @@ class UserSeeder extends Seeder
          ]);
 
          User::create([
-            'name'=>'nutricionista',
+            'name'=>'admin',
             'email'=>'Junior@gmail.com',
             'persona_id'=>'3',
             'password'=>bcrypt('12345678')
-        ])->assignRole(2);
+        ])->assignRole(1);
     }
 }
