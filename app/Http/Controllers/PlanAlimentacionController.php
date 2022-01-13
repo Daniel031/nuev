@@ -110,7 +110,7 @@ class PlanAlimentacionController extends Controller
         $plan->fechaInicio = $request->fechaInicio;
         $plan->fechaFin = date("d-m-Y",strtotime($request->fechaInicio."+ ".$request->numeroDeSemanas." week")); 
         $plan->activo = $request->activo;
-        $plan->tratamiento_id = $tratamiento->id;
+        $plan->tratamiento_id = $request->tratamiento->id;
         $plan->save();
         $grupo = Grupo::all()->where('plan_alimentacion_id',$plan->id)->first();
 

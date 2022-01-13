@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ConsultaExport;
 use Illuminate\Http\Request;
 use App\Models\Consulta;
 use App\Models\Paciente;
 use App\Models\Persona;
 use App\Models\Consultorio;
 use App\Models\ConsultaNutricionista;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ConsultaController extends Controller
 {
@@ -142,4 +144,84 @@ class ConsultaController extends Controller
         $consultum->delete();
         return redirect()->route('consulta.index');
     }
+
+    public function reporte( Request $request ) {
+
+        $consultorios =Consultorio::all();
+        $pacientes = Paciente::select( 'pacientes.id', 'pers.id as idpersonas', 'pers.nombres', 'pers.apellidos' )
+            ->join( 'personas as pers', 'pacientes.id', '=', 'pers.id' )
+            ->get();
+
+        return view('consulta.reporte', [
+            'pacientes' => $pacientes,
+            'consultorios' => $consultorios,
+        ]);
+    }
+
+    public function generar( Request $request ) {
+
+        $paciente_id = $request->input( 'paciente_id', null );
+        $consultorio_id = $request->input( 'consultorio_id', null );
+        $fechaHora_inicio = $request->input( 'fechaHora_inicio', null );
+        $fechaHora_final = $request->input( 'fechaHora_final', null );
+        $tiempoDeConsultaInicio = $request->input( 'tiempoDeConsultaInicio', null );
+        $tiempoDeConsultaFinal = $request->input( 'tiempoDeConsultaFinal', null );
+
+        $import_option = $request->input( 'import_option', null );
+
+        $consulta = [];
+
+        if ( !is_null( $paciente_id ) ) {
+            array_push( $consulta, [ 'consultas.paciente_id', '=', $paciente_id ] );
+        }
+
+        if ( !is_null( $consultorio_id ) ) {
+            array_push( $consulta, [ 'consnutri.consultorio_id', '=', $consultorio_id ] );
+        }
+
+        if ( !is_null( $fechaHora_inicio ) && !is_null( $fechaHora_final ) ) {
+            if ( is_null( $fechaHora_final ) ) {
+                array_push( $consulta, [ 'consnutri.fecha_hora', '>=', $fechaHora_inicio ] );
+            } else {
+                array_push( $consulta, [ 'consnutri.fecha_hora', '>=', $fechaHora_inicio ] );
+                array_push( $consulta, [ 'consnutri.fecha_hora', '<=', $fechaHora_final ] );
+            }
+        }
+
+        if ( !is_null( $tiempoDeConsultaInicio ) && !is_null( $tiempoDeConsultaFinal ) ) {
+            if ( is_null( $tiempoDeConsultaFinal ) ) {
+                array_push( $consulta, [ 'consnutri.tiempoDeConsulta', '>=', $tiempoDeConsultaInicio ] );
+            } else {
+                array_push( $consulta, [ 'consnutri.tiempoDeConsulta', '>=', $tiempoDeConsultaInicio ] );
+                array_push( $consulta, [ 'consnutri.tiempoDeConsulta', '<=', $tiempoDeConsultaFinal ] );
+            }
+        }
+
+        $consultas = new Consulta();
+
+        $arrayConsulta = $consultas
+            ->select(
+                'consultas.id', 'consultas.motivoConsulta', 'consultas.expectativa',
+                'consnutri.fecha_hora', 'consnutri.tiempoDeConsulta',
+                'consulrio.nombre as consultorio',
+                'pers.nombres', 'pers.apellidos'
+            )
+            ->join( 'consulta_nutricionistas as consnutri', 'consultas.id', '=', 'consnutri.consulta_id' )
+            ->join( 'consultorios as consulrio', 'consnutri.consultorio_id', '=', 'consulrio.id' )
+            ->join( 'pacientes as pacien', 'consultas.paciente_id', '=', 'pacien.id' )
+            ->join( 'personas as pers', 'pacien.id', '=', 'pers.id' )
+            ->where( $consulta )
+            ->orderBy( 'consultas.id', 'DESC' )
+            ->get();
+
+        if ( $import_option == "PDF" ) {
+            $pdf = \PDF::loadview( 'reporte.consultas', compact( 'arrayConsulta' ) );
+            return $pdf->download( 'consultas.pdf' );
+        }
+
+        return Excel::download(new ConsultaExport( $arrayConsulta ), 'consultas.xlsx');
+        
+
+    }
+
 }
