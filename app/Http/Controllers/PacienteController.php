@@ -26,10 +26,10 @@ class PacienteController extends Controller
     {
         // $this->middleware('auth');//?
 
-        // $this->middleware('can:paciente.index')->only('index');
-        // $this->middleware('can:paciente.create')->only('create', 'store');
-        // $this->middleware('can:paciente.edit')->only('edit', 'update');
-        // $this->middleware('can:paciente.destroy')->only('destroy');
+        $this->middleware('can:pacientes.index')->only('index');
+        $this->middleware('can:pacientes.create')->only('create', 'store');
+        $this->middleware('can:pacientes.edit')->only('edit', 'update');
+        $this->middleware('can:pacientes.destroy')->only('destroy');
     }
     // public function PDF(){
       //  $pdf=\PDF::loadView('paciente');
@@ -53,7 +53,7 @@ class PacienteController extends Controller
     {
         $pacientes = Paciente::all();
         $personas = Persona::all();
-        $images=Images::all();
+        $images = Images::all();
         return view('paciente.index', compact('pacientes', 'images', 'personas'));
         //return $pacientes->last()->persona->image;
     }
@@ -81,8 +81,11 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         $persona = Persona::create($request->all());
+        $persona->tipo = 'P';
+        $persona->save();
+
         if ($request->hasFile('image')) {
-            $url = Storage::put('perfil',$request->file('image'));//Storage::put('perfil', $request->file('image'));
+            $url = Storage::put('perfil', $request->file('image')); //Storage::put('perfil', $request->file('image'));
             $persona->image()->create([
                 'url' => $url,
                 'imageable_id' => $persona->id,
@@ -91,7 +94,6 @@ class PacienteController extends Controller
         }
         $paciente = Paciente::create(['id' => $persona->id, 'nutricionista_id' => (int) $request->nutricionista_id]);
         return redirect()->route('paciente.index');
-
     }
 
     /**
@@ -103,7 +105,7 @@ class PacienteController extends Controller
     public function show(Paciente $paciente)
     {
         $tratamientos = Tratamiento::where('paciente_id', $paciente->id);
-        $image=Images::all();
+        $image = Images::all();
         return view('paciente.show', compact('tratamientos', 'paciente', 'image'));
     }
     /**
@@ -116,10 +118,10 @@ class PacienteController extends Controller
     {
         $nutricionistas = Nutricionista::all();
         $personas = Persona::all();
-        $persona=$personas->find($paciente->id);
-        $image=$persona->image;
-        return view('paciente.perfil', compact('paciente', 'persona','personas', 'image','nutricionistas'));
-       // return view('paciente.imagen',compact('image'));
+        $persona = $personas->find($paciente->id);
+        $image = $persona->image;
+        return view('paciente.perfil', compact('paciente', 'persona', 'personas', 'image', 'nutricionistas'));
+        // return view('paciente.imagen',compact('image'));
         //return $paciente->persona->fechaNacimiento;
     }
 
@@ -141,20 +143,19 @@ class PacienteController extends Controller
                 Storage::delete($persona->image->url);
                 $persona->image->delete();
             }
-            $url=Storage::put('perfil',$request->file('image'));
+            $url = Storage::put('perfil', $request->file('image'));
             $persona->image()->create([
-                'url'=>$url,
-                'imageable_id'=>$persona->id,
-                'imageable_type'=>Persona::class
+                'url' => $url,
+                'imageable_id' => $persona->id,
+                'imageable_type' => Persona::class
             ]);
-
         }
         /*$paciente->id = $persona->id;
 
         $paciente->nutricionista_id = $request->nutricionista_id;
 
         $paciente->save();*/
-       // return $persona->image;
+        // return $persona->image;
         return redirect()->route('paciente.index');
     }
 
@@ -171,6 +172,5 @@ class PacienteController extends Controller
         $persona->delete();
 
         return redirect()->route('paciente.index');
-
     }
 }
