@@ -8,6 +8,9 @@ use App\Models\Nutricionista;
 use App\Models\Paciente;
 use App\Models\Persona;
 use App\Models\Tratamiento;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,11 +26,29 @@ class PacienteController extends Controller
     {
         // $this->middleware('auth');//?
 
-        $this->middleware('can:paciente.index')->only('index');
-        $this->middleware('can:paciente.create')->only('create', 'store');
-        $this->middleware('can:paciente.edit')->only('edit', 'update');
-        $this->middleware('can:paciente.destroy')->only('destroy');
+        // $this->middleware('can:paciente.index')->only('index');
+        // $this->middleware('can:paciente.create')->only('create', 'store');
+        // $this->middleware('can:paciente.edit')->only('edit', 'update');
+        // $this->middleware('can:paciente.destroy')->only('destroy');
     }
+    // public function PDF(){
+      //  $pdf=\PDF::loadView('paciente');
+        //return $pdf->download('paciente.pdf');
+    //}
+    public function impriPDF(){
+        //dd("hola");
+        $pacientes = Paciente::all();
+        $pdf=\PDF::loadview('reporte.paciente',compact('pacientes'));
+        return $pdf ->download('paciente.pdf');
+    
+    }
+    // public function UserExport()
+    // {       
+       
+    // return Excel::download(new UserExport,'paciente-xlsx');
+       
+    // }
+    
     public function index()
     {
         $pacientes = Paciente::all();
@@ -36,12 +57,14 @@ class PacienteController extends Controller
         return view('paciente.index', compact('pacientes', 'images', 'personas'));
         //return $pacientes->last()->persona->image;
     }
+    
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         $nutricionistas = Nutricionista::all();

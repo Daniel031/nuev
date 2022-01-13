@@ -8,6 +8,7 @@
 
 @section('content')
     <a href=" {{ route('consulta.create') }} " class="btn btn-primary mb-4">CREAR</a>
+    <a href=" /consulta/reporte " class="btn btn-primary mb-4">REPORTE</a>
 
     <table id="consultas" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">

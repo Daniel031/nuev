@@ -17,28 +17,28 @@ class ConsultaNutricionistaSeeder extends Seeder
 
         $consultorios = ([
             [
-                'fecha_hora' => '22-09-2021 10:00:00',
+                'fecha_hora' => '2021-09-22 10:00:00',
                 'tiempoDeConsulta' => '1:00:00',
                 'consultorio_id'=>1,
                 'nutricionista_id' => 1,
                 'consulta_id' => 1,
             ],
             [
-                'fecha_hora' => '22-09-2021 12:00:00',
+                'fecha_hora' => '2021-09-22 12:00:00',
                 'tiempoDeConsulta' => '1:00:00',
                 'consultorio_id'=>2,
                 'nutricionista_id' => 1,
                 'consulta_id' => 2,
             ],
             [
-                'fecha_hora' => '22-09-2021 13:00:00',
+                'fecha_hora' => '2021-09-22 13:00:00',
                 'tiempoDeConsulta' => '1:00:00',
                 'consultorio_id'=>3,
                 'nutricionista_id' => 1,
                 'consulta_id' => 3,
             ],
             [
-                'fecha_hora' => '22-01-2022 15:00:00',
+                'fecha_hora' => '2022-01-22 15:00:00',
                 'tiempoDeConsulta' => '1:00:00',
                 'consultorio_id'=>4,
                 'nutricionista_id' => 1,

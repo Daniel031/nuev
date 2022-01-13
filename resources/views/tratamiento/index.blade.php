@@ -3,10 +3,14 @@
 @section('title', 'TRATAMIENTO')
 
 @section('content_header')
-    <h1>Tratamientos</h1>
+    <h1>Lista de Tratamientos</h1>
 @stop
 
 @section('content')
+<<<<<<< HEAD
+    <a href=" {{ route('tratamientos.create') }} " class="btn btn-primary mb-4">CREAR</a>
+    <a href='/reportetratamientogenerar-pdf' class="btn btn-primary mb-4" target="_blank">REPORTE</a> 
+=======
 
 <label for="ci">Paciente ID: {{$paciente->id}}
 <br>            Nombre : {{$persona->where('id',$paciente->id)->first()->nombres}} {{$persona->where('id',$paciente->id)->first()->apellidos}}
@@ -22,6 +26,7 @@
 
     <a href=" {{ route('paciente.tratamiento.create',compact('paciente')) }} " class="btn btn-primary mb-4">CREAR</a>
     <a href=" {{ route('paciente.show',compact('paciente')) }} " class="btn btn-success mb-4">VOLVER A PACIENTE</a>
+>>>>>>> 2d81ba4140b7800bcc02b6382fb5976514d74f80
 
     <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">

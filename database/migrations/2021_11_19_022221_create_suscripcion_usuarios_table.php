@@ -15,11 +15,10 @@ class CreateSuscripcionUsuariosTable extends Migration
     {
         Schema::create('suscripcion_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('fecha_inicio');
-            $table->timestamp('fecha_fin');
-            $table->string('activo');
+            $table->timestamp('fecha_inicio')->nullable();
+            $table->timestamp('fecha_fin')->nullable();
+            $table->boolean('activo');
             $table->boolean('pagado');
-
             $table->foreignId('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('suscripcion_id')->references('id')->on('suscripcions')
