@@ -116,13 +116,13 @@
             </thead>
             <TBODY>
                 @foreach ($pacientes as $user)
+            @isset ($users->where('persona_id',$user->id)->first()->name)
+                
                     <tr>
                         <td>{{$users->where('persona_id',$user->id)->first()->name}}</td>
                         <td>{{ $users->where('persona_id',$user->id)->first()->email }}</td>
                         <td>{{ $personas->where('id',$user->id)->first()->nombres }}</td>
                 <td>
-
-
                     <!---->
                     <form action="{{ route('users.destroy', $users->where('persona_id',$user->id)->first()) }}" method="POST">
                         {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
@@ -135,6 +135,7 @@
                     </form>
                 </td>
                 </tr>
+                @endisset
                 @endforeach
             </TBODY>
         </table>

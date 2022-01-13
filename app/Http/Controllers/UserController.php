@@ -34,6 +34,7 @@ class UserController extends Controller
         // return $pacientes;
         $users = User::all();
         $personas = Persona::all();
+        // return $users;
         return view('user.index', compact('users', 'personas', 'userNutricionista', 'pacientes'));
     }
 
