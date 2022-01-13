@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Movil\AuthController;
+use App\Http\Controllers\Movil\ControlActividadMovilController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,5 +27,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('/user',[AuthController::class,'getAuthenticatedUser']);
 
     Route::post('/logout',[AuthController::class,'logout']);
+
+    Route::post('/actividad',[ControlActividadMovilController::class,'lista']);
 
 });

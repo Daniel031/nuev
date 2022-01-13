@@ -18,7 +18,7 @@ class ControlActividadMovilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function lista(Request $request)
     {
         //
     }
