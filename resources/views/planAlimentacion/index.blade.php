@@ -69,7 +69,7 @@ $planAlimentacion = $plan;
 
                     @csrf  <!--metodo para añadir token a un formulario-->
                     <button type="submit" class="btn btn-secondary">Ver</button>
-                    <a href="" class="btn btn-success">+COMIDA</a>
+                    <a href="{{route('paciente.tratamiento.planAlimentacion.comida.index',compact('paciente','tratamiento','planAlimentacion'))}}" class="btn btn-success">+COMIDA</a>
                 </form>
             </td>
         </tr>

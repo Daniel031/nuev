@@ -22,7 +22,7 @@ class CreateActividadControlsTable extends Migration
             $table->foreign('actividad_id')->references('id')->on('actividads');
             $table->foreign('control_id')->references('id')->on('controls');
 
-            $table->unsignedInteger('cantidadSemanal');
+
             $table->unsignedInteger('tiempoDiario');
             $table->unsignedInteger('promedioDiario')->nullable();
             $table->unsignedInteger('gastoActividad')->nullable();//gasto total de toda la actividad

@@ -17,6 +17,7 @@ use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UnidadMedidaController;
 use App\Http\Controllers\PacienteConsultaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ComidaController;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PlanAlimentacionController;
@@ -51,18 +52,14 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
 
     Route::resource('/admin/paciente', PacienteController::class);
     Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
-<<<<<<< HEAD
     Route::get('paciente/create/actividad/{paciente}',[ControlActividadController::class,'create'])->name('paciente.actividadCreate');
     Route::post('paciente/store/actividad/{paciente}',[ControlActividadController::class,'store'])->name('paciente.actividadStore');
     Route::get('paciente/show/actividad/{paciente}/{control}',[ControlActividadController::class,'show'])->name('paciente.actividadShow');
     Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'edit'])->name('paciente.perfil');
-=======
 
-    Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'perfil'])->name('paciente.perfil');
     Route::get('/consulta/reporte', [ConsultaController::class, 'reporte']);
     Route::post('/consulta/generar', [ConsultaController::class, 'generar']);
 
->>>>>>> 16920eaf139a8f131f791f0cf42dbf0f20c49dcb
     Route::resource('profile', ProfileController::class);
     Route::resource('consulta', ConsultaController::class);
     Route::resource('unidadMedida', UnidadMedidaController::class);
@@ -74,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
     Route::resource('control', ControlController::class);
     Route::resource('paciente.tratamiento',TratamientoController::class);
     Route::resource('paciente.tratamiento.planAlimentacion',PlanAlimentacionController::class);
-
+    Route::resource('paciente.tratamiento.planAlimentacion.comida',ComidaController::class);
     Route::resource('tratamientos', TratamientoController::class);
     Route::resource('administradors', AdministradorController::class);
     Route::resource('suscripcions', SuscripcionController::class);

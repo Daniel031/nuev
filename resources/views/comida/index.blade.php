@@ -3,7 +3,7 @@
 @section('title', 'PACIENTE')
 
 @section('content_header')
-    <h1>Plan Alimentacion</h1>
+    <h1>COMIDAS</h1>
 
 @stop
 @section('content')
@@ -22,8 +22,8 @@
 <br>
 </label>
 <br>
-<a href=" {{ route('paciente.tratamiento.planAlimentacion.create',compact('paciente','tratamiento')) }} " class="btn btn-primary mb-4">CREAR</a>
-<a href=" {{ route('paciente.tratamiento.index',compact('paciente')) }} " class="btn btn-secondary mb-4">ATRAS</a>
+<a href=" {{ route('paciente.tratamiento.planAlimentacion.comida.create',compact('paciente','tratamiento','planAlimentacion')) }} " class="btn btn-primary mb-4">CREAR</a>
+<a href=" {{ route('paciente.tratamiento.planAlimentacion.index',compact('paciente','tratamiento')) }} " class="btn btn-secondary mb-4">ATRAS</a>
 <a href=" {{ route('paciente.show',compact('paciente')) }} " class="btn btn-success mb-4">VOLVER A PACIENTE</a>
 <br>
 <table id="pacientes" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
@@ -31,45 +31,28 @@
 
    <tr>
     <th scope="col">ID</th>
-      <th scope="col">FECHA DE INICIO</th>
-      <th scope="col">FECHA FINAL</th>
-      <th scope="col">DIAS</th>
-      <th scope="col">ACTIVO</th>
+      <th scope="col">NOMBRE DE COMIDA</th>
+      <th scope="col">ALIMENTO</th>
       <th scope="col">ACCIONES</th>
 
    </tr>
 </thead>
 <TBODY>
-    @foreach ($planAlimentacions as $plan)
+    @foreach ($comidas as $comida)
             <tr>
 
-            <td>{{$plan->id}}</td>
-            <td>{{$plan->fechaInicio}}</td>
-            <td>{{$plan->fechaFin}}</td>
-            <td>
-            @foreach ($diaGrupo->where('grupo_id',$grupo->where('plan_alimentacion_id',$plan->id)->first()->id) as $idDia)
-                {{$dias->where('id',$idDia->dia_id)->first()->nombre}}
-            @endforeach    
-            
-            </td>
-            @if ($plan->activo)
-            <td>Activo</td>
-            @else
-            <td>Inactivo</td>
-            @endif
+            <td>{{$comida->id}}</td>
+            <td>{{$comida->nombre}}</td>
+            <td>{{$alimentos->where('id',$comida->alimento_id)->first()->nombre}}</td>
 
 
             <td>
-@php
-$planAlimentacion = $plan;    
-@endphp
 
-                <form action="" method="POST">
-                    <a href="{{route('paciente.tratamiento.planAlimentacion.edit',compact('paciente','tratamiento','planAlimentacion'))}}" class="btn btn-primary">Editar</a>
-
+                <form action="{{route('paciente.tratamiento.planAlimentacion.comida.destroy',compact('paciente','tratamiento','planAlimentacion','comida'))}}" method="POST">
+                    <a href="{{route('paciente.tratamiento.planAlimentacion.comida.edit',compact('paciente','tratamiento','planAlimentacion','comida'))}}" class="btn btn-primary">Editar</a>
+                    @method('delete')
                     @csrf  <!--metodo para añadir token a un formulario-->
-                    <button type="submit" class="btn btn-secondary">Ver</button>
-                    <a href="" class="btn btn-success">+COMIDA</a>
+                    <button type="submit" class="btn btn-secondary">Eliminar</button>
                 </form>
             </td>
         </tr>

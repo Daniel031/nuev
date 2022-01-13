@@ -38,7 +38,6 @@ class ControlActividadController extends Controller
     }
     public function store(PacienteActividadRequest $request, Paciente $paciente)
     {
-
         $actividades = json_decode($request->json);
         Control::create([
             'fecha' => $request->fecha,
