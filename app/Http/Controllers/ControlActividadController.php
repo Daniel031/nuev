@@ -15,16 +15,17 @@ class ControlActividadController extends Controller
     {
 
         $tratamiento = $paciente->tratamientos->where('completo', '=', false)->first();
-        if ($tratamiento != null) {
-            $controles = Control::orderBy('fecha', 'desc')->first();
-            $controles = $controles->where('tratamiento_id', '=', $tratamiento->id)->where('tipo_control', '=', true);
-            $controles = $controles->where('tipo_control', '=', true)->orderBy('created_at', 'desc')->get();
-        } else {
-            $controles = Control::all();
-        }
+
+
+//            $controles = Control::orderBy('fecha', 'desc')->first();
+            $controles = Control::All()->where('tratamiento_id', '=', $tratamiento->id)->where('tipo_control', '=', true);
+
+
         //return $controles->first()->actividadControls;
+
+        $historialC = HistoriaClinica::all()->where('paciente_id', '=', $paciente->id)->last();
         $acontrol=ActividadControls::All();
-        return view('admin.actividad.actividadPaciente', compact('paciente', 'controles','acontrol'));
+        return view('admin.actividad.actividadPaciente', compact('paciente', 'controles','acontrol','historialC'));
 
     }
     public function create(Paciente $paciente)
@@ -63,5 +64,12 @@ class ControlActividadController extends Controller
             ]);
         }
         return redirect()->route('paciente.actividad',compact('paciente'));
+    }
+    public function show(Paciente $paciente, Control $control){
+        $historialC = HistoriaClinica::all()->where('paciente_id', '=', $paciente->id)->last();
+
+        $ac= $control->actividadControls;
+     //   return $ac;
+        return view('admin.actividad.showActividadPaciente',compact('paciente','control','ac','historialC'));
     }
 }

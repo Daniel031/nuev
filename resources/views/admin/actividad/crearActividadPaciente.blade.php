@@ -22,7 +22,7 @@
                             {{ $paciente->persona->apellidos }}</p>
                     </div>
                     <div class="col-auto">
-                        <label class="text-bold">Paciente: </label>
+                        <label class="text-bold">Peso: </label>
                     </div>
                     <div clas="col-auto">
                         <p>{{ $historialC->peso }} kg</p>
@@ -136,12 +136,12 @@
                 <div class="row px-2">
                     <div class="col-6" style="background:cadetblue;height: 40px;text-align: center">
                         {{-- <label class="text-bold" style="color: #606061 ;">0</label> --}}
-                        <input id="total" name="total"  readonly type="number" class="text-bold" style="color: #606061 ;"
-                            value=0>
+                        <input id="total" name="total" readonly type="number" class="text-bold"
+                            style="color: #606061 ;" value=0>
                     </div>
                     <div class="col-6" style="background: lightskyblue;height: 40px;text-align: center; ">
                         {{-- <label class="text-bold" style="color: #606061;">0</label> --}}
-                        <input id="promedio" name="promedio"  readonly type="number" value=0 class="text-bold"
+                        <input id="promedio" name="promedio" readonly type="number" value=0 class="text-bold"
                             style="color: #606061;">
                     </div>
                 </div>
@@ -189,7 +189,6 @@
                 cell0.textContent = Object.values(JSON.parse(obj))[1]
 
                 let cell1 = row.insertCell(1);
-                cell1.textContent = formdata.get('tiempo')
                 let cell2 = row.insertCell(2);
                 var radio = document.getElementsByName('Radio');
                 var medida
@@ -197,6 +196,11 @@
                     if (radio[i].checked) {
                         medida = radio[i].id;
                         cell2.textContent = medida;
+                        if (medida == "minuto") {
+                            cell1.textContent = formdata.get('tiempo')
+                        } else {
+                            cell1.textContent = formdata.get('tiempoh')
+                        }
                     }
                 }
 
@@ -204,12 +208,11 @@
                 let time = document.getElementById('Radio');
                 if (medida == "minuto") {
                     cell3.textContent = Object.values(JSON.parse(obj))[2] * 0.0175 * "<?php echo $historialC->peso; ?>" *
-                        formdata.get(
-                            'tiempo');
+                        formdata.get('tiempo');
                 } else {
                     cell3.textContent = Object.values(JSON.parse(obj))[2] * 0.0175 * "<?php echo $historialC->peso; ?>" *
-                        formdata.get(
-                            'tiempoh') * 60;
+                        formdata.get('tiempoh') * 60;
+
                 }
                 let newDeleteCell = row.insertCell(4);
                 let deleteButton = document.createElement("button");
