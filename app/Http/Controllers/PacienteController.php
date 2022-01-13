@@ -40,15 +40,15 @@ class PacienteController extends Controller
         $pacientes = Paciente::all();
         $pdf=\PDF::loadview('reporte.paciente',compact('pacientes'));
         return $pdf ->download('paciente.pdf');
-    
+
     }
     // public function UserExport()
-    // {       
-       
+    // {
+
     // return Excel::download(new UserExport,'paciente-xlsx');
-       
+
     // }
-    
+
     public function index()
     {
         $pacientes = Paciente::all();
@@ -57,14 +57,14 @@ class PacienteController extends Controller
         return view('paciente.index', compact('pacientes', 'images', 'personas'));
         //return $pacientes->last()->persona->image;
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function create()
     {
         $nutricionistas = Nutricionista::all();

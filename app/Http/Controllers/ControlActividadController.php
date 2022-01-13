@@ -63,6 +63,7 @@ class ControlActividadController extends Controller
                 'fechaHora_establecida' => $request->fecha,
             ]);
         }
+        //return ActividadControls::all()->last();
         return redirect()->route('paciente.actividad',compact('paciente'));
     }
     public function show(Paciente $paciente, Control $control){
