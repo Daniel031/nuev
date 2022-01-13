@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paciente;
 use App\Models\Persona;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,9 +27,15 @@ class UserController extends Controller
     
     public function index()
     {
+        $userNutricionistaid= auth()->user()->id;
+        $userNutricionista= User::where('id', $userNutricionistaid)->first();
+        $pacientes = Paciente::where('nutricionista_id', $userNutricionista->persona_id)->get();
+        // $pacientes=Paciente::all();
+        // return $pacientes;
         $users = User::all();
         $personas = Persona::all();
-        return view('user.index', compact('users', 'personas'));
+        // return $users;
+        return view('user.index', compact('users', 'personas', 'userNutricionista', 'pacientes'));
     }
 
     /**

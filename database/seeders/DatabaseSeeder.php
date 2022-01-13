@@ -46,5 +46,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ConsultaSeeder::class);
         $this->call(ConsultaNutricionistaSeeder::class);
         $this->call(HistoriaClinicaSeeder::class);
+        $this->call(SuscripcionSeeder::class);
     }
 }

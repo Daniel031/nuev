@@ -1,9 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR PACIENTE')
+@section('title', 'CREAR NUTRICIONISTA')
 
 @section('content_header')
-    <h1>Crear Pacientes</h1>
+    @hasanyrole('nuevo')
+        <h1>Llenar datos</h1>
+    @else
+        <h1>Crear Nutricionista</h1>
+    @endhasanyrole
 @stop
 
 @section('content')
@@ -42,7 +46,7 @@
             <label for="profesion">Profesion </label>
             <input type="text" class="form-control" id="profesion" name="profesion" placeholder="Profesion" required>
         </div>
-        
+
         <a href="{{ route('paciente.index') }}" class="btn btn-danger mb-4">Cancelar</a>
         <button class="btn btn-primary mb-4" type="submit">Guardar</button>
         @csrf

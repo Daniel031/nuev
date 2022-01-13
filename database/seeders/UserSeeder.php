@@ -18,8 +18,9 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'nutricionista',
             'email'=>'Nutridiet@gmail.com',
+            'persona_id'=>'1',
             'password'=>bcrypt('12345678'),
-        ])->assignRole(1);
+        ])->assignRole(2);
 
          User::create([
              'name'=>'Paciente',
@@ -28,9 +29,10 @@ class UserSeeder extends Seeder
          ]);
 
          User::create([
-            'name'=>'Paciente',
-            'email'=>'Junior78@gmail.com',
-            'password'=>bcrypt('33334444')
-        ]);
+            'name'=>'admin',
+            'email'=>'Junior@gmail.com',
+            'persona_id'=>'3',
+            'password'=>bcrypt('12345678')
+        ])->assignRole(1);
     }
 }

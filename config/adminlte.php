@@ -251,11 +251,13 @@ return [
         ],
         [
             'text' => 'Administrador',
+            'can'  => 'administradors.index',
             'url'  => 'administradors',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Usuario',
+            'can'  => 'users.index',
             'url'  => 'users',
             'icon' => 'fas fa-fw fa-user',
         ],
@@ -263,31 +265,37 @@ return [
             'text' => 'Roles',
             'url'  => 'roles',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'roles.index',
         ],
         [
             'text' => 'Nutricionista',
             'url'  => 'nutricionistas',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'nutricionistas.index',
         ],
         [
             'text' => 'Suscripcion',
             'url'  => 'suscripcions',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'suscripcions.index',
         ],
         [
             'text' => 'Suscriptores',
             'url'  => 'suscripcionUsuarios',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'suscripcion_usuarios.index',
         ],
         [
             'text' => 'tipo de medida',
             'url'  => 'tipoMedida',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'tipo_medidas.index',
         ],
         [
             'text' => 'medida',
             'url'  => 'medida',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'medidas.index',
         ],
         [
 
@@ -299,24 +307,28 @@ return [
             'icon' => 'fas fa-book',
             'text' => ' Consulta',
             'url'  => 'consulta',
+            'can'  => 'consultas.index',
         ],
         [
             'icon' =>' fas fa-balance-scale-right',
             'text' => ' Unidad de medida',
             'url'  => 'unidadMedida',
+            'can'  => 'unidadMedidas.index',
         ],
         ['header' => 'FUNCIONALIDADES'],
         [
             'text'       => 'Actividad',
             'icon_color' => 'red',
             'url'        => 'admin/actividad',
-            'icon'       => 'fab fa-buffer'
+            'icon'       => 'fab fa-buffer',
+            'can'       => 'actividads.index'
         ],
         [
             'text'       => 'Alimento',
             'icon_color' => 'red',
             'url'        => 'admin/alimento',
-            'icon'       => 'fas fa-carrot'
+            'icon'       => 'fas fa-carrot',
+            'can'       => 'alimentos.index'
         ],
         [
             'text'       => 'information',

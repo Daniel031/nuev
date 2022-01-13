@@ -20,7 +20,6 @@ class CreateControlsTable extends Migration
             $table->boolean('cumplido')->nullable(); //si es true la actividad ha sido cumplido, false si no ha sido cumplido por el paciente
 
             $table->unsignedInteger('cantidadSemanal');
-
             $table->decimal('promedioDiario', 8, 2)->nullable();
             $table->decimal('gastoActividad', 8, 2)->nullable(); //gasto total de toda la actividad
             $table->foreignId('tratamiento_id')->references('id')->on('tratamientos')

@@ -12,8 +12,9 @@
             <strong>{{ session('info') }}</strong>
         </div>
     @endif
-
+    @hasanyrole('administrador')
     <a href="{{ route('suscripcions.create') }}" class="btn btn-primary mb-4">CREAR</a>
+@endhasanyrole
 
     <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
@@ -21,7 +22,9 @@
                 <th scope="col">NOMBRE</th>
                 <th scope="col">MESES</th>
                 <th scope="col">COSTO</th>
+                @hasanyrole('administrador')
                 <th scope="col">ACCIONES</th>
+            @endhasanyrole
             </tr>
         </thead>
         <TBODY>
@@ -30,6 +33,7 @@
                     <td>{{ $suscripcion->nombre }}</td>
                     <td>{{ $suscripcion->meses }}</td>
                     <td>{{ $suscripcion->monto_total }}</td>
+                    @hasanyrole('administrador')
                     <td>
                         <!---->
                         <form action="{{ route('suscripcions.destroy', $suscripcion) }}" method="POST">
@@ -42,6 +46,8 @@
                             {{-- <a href="{{route('users.show', $user)}}" class="btn btn-primary">Mostrar</a> --}}
                         </form>
                     </td>
+                    
+                @endhasanyrole
                 </tr>
             @endforeach
         </TBODY>

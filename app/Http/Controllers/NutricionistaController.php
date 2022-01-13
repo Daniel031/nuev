@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Spatie\Permission\Traits\HasRoles;
 use App\Models\Nutricionista;
 use App\Models\Paciente;
 use App\Models\Persona;
+use App\Models\SuscripcionUsuario;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class NutricionistaController extends Controller
 {
@@ -18,10 +21,10 @@ class NutricionistaController extends Controller
     public function __construct(){
         // $this->middleware('auth');//?
 
-    //    $this->middleware('can:nutricionistas.index')->only('index');
+       $this->middleware('can:nutricionistas.index')->only('index');
         // $this->middleware('can:nutricionistas.create')->only('create', 'store');
-        // $this->middleware('can:nutricionistas.edit')->only('edit', 'update');
-        // $this->middleware('can:nutricionistas.destroy')->only('destroy');
+        $this->middleware('can:nutricionistas.edit')->only('edit', 'update');
+        $this->middleware('can:nutricionistas.destroy')->only('destroy');
     }
     public function impriPDF(){
         //dd("hola");
@@ -29,12 +32,19 @@ class NutricionistaController extends Controller
         $pdf=\PDF::loadview('reporte.nutricionista',compact('nutricionistas'));
     return $pdf ->download('nutricionista.pdf');
     
+        $this->middleware('can:nutricionistas.index')->only('index');
+        // $this->middleware('can:nutricionistas.create')->only('create', 'store');
+        $this->middleware('can:nutricionistas.edit')->only('edit', 'update');
+        $this->middleware('can:nutricionistas.destroy')->only('destroy');
     }
     public function index()
     {
+        $userNutricionistaid= auth()->user()->id;
+        $userNutricionista= User::where('id', $userNutricionistaid)->first();
+        
         $nutricionistas = Nutricionista::all();
         $personas = Persona::all();
-        return view('nutricionista.index',compact('nutricionistas','personas'));
+        return view('nutricionista.index',compact('nutricionistas','personas', 'userNutricionista'));
     }
 
     /**
@@ -44,6 +54,16 @@ class NutricionistaController extends Controller
      */
     public function create()
     {
+        
+        $user2= auth()->user()->id;
+$user=User::where('id', $user2)->first();
+// return $user;
+        if($user->hasAnyRole('nutricionista', 'administrador')){//tiene rol nutricionista
+            
+        }else{
+            $user->assignRole(3);
+        }
+        
         // $personas = Persona::all();
         return view('nutricionista.create');
     }
@@ -63,6 +83,7 @@ class NutricionistaController extends Controller
         $persona->fechaNacimiento = $request->get('fechaNacimiento');
         $persona->sexo = $request->get('sexo');
         $persona->celular = $request->get('celular');
+        $persona->tipo = 'N';
         $persona->save();
 
         $paciente = new Nutricionista();
@@ -70,6 +91,25 @@ class NutricionistaController extends Controller
         $paciente->profesion = $request->get('profesion');
 
         $paciente->save();
+
+        $user= auth()->user();
+        if($user->hasAnyRole('nuevo')){//tiene rol nutricionista
+            $user->persona_id=$persona->id;
+            $user->save();
+            
+            $suscripcionUsuario = new SuscripcionUsuario();
+            $suscripcionUsuario->suscripcion_id = '1';
+            $fecha1 = date("d-m-Y");
+            $suscripcionUsuario->fecha_inicio = $fecha1;
+            $fecha = date("d-m-Y", strtotime($fecha1 . ' + 1 month'));
+            $suscripcionUsuario->fecha_fin = $fecha;
+            $suscripcionUsuario->activo = 'true';
+            $suscripcionUsuario->pagado = false;
+            $suscripcionUsuario->user_id = $user->id;
+            $suscripcionUsuario->save();
+            // $user->assignRole(2);
+            $user->syncRoles(2);
+        }
         return redirect()->route('nutricionistas.index');
     }
 

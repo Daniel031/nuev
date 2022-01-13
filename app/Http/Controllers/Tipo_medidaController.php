@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class Tipo_medidaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:tipo_medidas.index')->only('index');
+        $this->middleware('can:tipo_medidas.create')->only('create', 'store');
+        $this->middleware('can:tipo_medidas.edit')->only('edit', 'update');
+        $this->middleware('can:tipo_medidas.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $tipomedidas = TipoMedida::all();

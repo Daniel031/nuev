@@ -8,22 +8,31 @@
 
 @section('content')
     <form action="{{ route('suscripcionUsuarios.store') }}" method="POST">
+
         <div class="form-group">
             <label for="ci">Plan de suscripcion</label>
             <select class="form-control" aria-label=".form-select-sm example" name="suscripcion_id" id="meses" onclick="sumarMes()">
-                <option value="">Escoger Plan</option>
+                {{-- <option value="1">Escoger Plan</option> --}}
                 @foreach ($suscripcions as $suscripcion)
-                    <option value="{{ $suscripcion->id }}"> {{ $suscripcion->nombre }}</option>
+                    <option value="{{ $suscripcion->id }}">Plan {{ $suscripcion->nombre }}, duracion mensual:  {{$suscripcion->meses}}, costo del plan: {{$suscripcion->monto_total}} $$</option>
                 @endforeach
             </select>
         </div>
+
         <div class="form-group">
             <label for="fechaIni">Fecha de inicio </label>
-            <input type="date" class="form-control" id="fechaIni" name="fecha_inicio" placeholder="" required>
+            <input type="text" class="form-control" id="fechaIni" name="" placeholder="" required disabled 
+            value="<?php echo date('d')." - ".date("m")." - ".date("Y") ; ?>"
+            >
         </div>
         <div class="form-group">
-            <label for="fechafin">Fecha de finalizacion </label>
-            <input type="date" class="form-control" id="fechafin" name="fecha_fin" placeholder="" required disabled value="">
+            <label for="persona">Nutricionista</label>
+            <select class="form-control" aria-label=".form-select-sm example" name="persona_id" id="persona">
+                {{-- <option value="1">Escoger Plan</option> --}}
+                @foreach ($personas as $persona)
+                    <option value="{{ $persona->id }}">{{ $persona->nombres }} {{ $persona->apellidos }}</option>
+                @endforeach
+            </select>
         </div>
         <div>
             <br>
@@ -34,16 +43,18 @@
         </div>
     </form>
 
-    <script language="javascript">
-        function sumarMes(){
-            meses= document.getElementById('meses');
-            fechaini= document.getElementById('fechaIni');
-            // fechafina= (fechaini.getMonth() + meses );
-            fechaini.setMonth(fechaini.getMonth() + meses);
-            document.getElementById('fechafin').value = fechaini;
-        }
+    {{-- <script language="javascript">
+        let fecha = new Date();
+        // document.getElementById('fechaIni').setAttribute('min', {{}});
 
-    </script>
+        function sumarMes() {
+            // meses= document.getElementById('suscripcion_id').value;
+            fechaini = document.getElementById('fechaIni').value;
+            // fechafina= (fechaini.getMonth() + meses );
+            // fechaini.setMonth(fechaini.getMonth() + meses);
+            document.getElementById('paq').value = 5;
+        }
+    </script> --}}
 
 @stop
 

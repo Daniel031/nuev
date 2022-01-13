@@ -13,6 +13,16 @@ class AdministradorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:administradors.index')->only('index');
+        $this->middleware('can:administradors.create')->only('create', 'store');
+        $this->middleware('can:administradors.edit')->only('edit', 'update');
+        $this->middleware('can:administradors.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $administradors = Administrador::all();
