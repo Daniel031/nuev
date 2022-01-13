@@ -51,11 +51,18 @@ Route::group(['middleware' => 'auth'], function () { //si no esta logueado me ma
 
     Route::resource('/admin/paciente', PacienteController::class);
     Route::get('paciente/actividad/{paciente}',[ControlActividadController::class,'index'])->name('paciente.actividad');
+<<<<<<< HEAD
+    Route::get('paciente/create/actividad/{paciente}',[ControlActividadController::class,'create'])->name('paciente.actividadCreate');
+    Route::post('paciente/store/actividad/{paciente}',[ControlActividadController::class,'store'])->name('paciente.actividadStore');
+    Route::get('paciente/show/actividad/{paciente}/{control}',[ControlActividadController::class,'show'])->name('paciente.actividadShow');
+    Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'edit'])->name('paciente.perfil');
+=======
 
     Route::get('paciente/perfil/{paciente}', [PacienteController::class, 'perfil'])->name('paciente.perfil');
     Route::get('/consulta/reporte', [ConsultaController::class, 'reporte']);
     Route::post('/consulta/generar', [ConsultaController::class, 'generar']);
 
+>>>>>>> 16920eaf139a8f131f791f0cf42dbf0f20c49dcb
     Route::resource('profile', ProfileController::class);
     Route::resource('consulta', ConsultaController::class);
     Route::resource('unidadMedida', UnidadMedidaController::class);
