@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 
 class ActividadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct(){
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:actividads.index')->only('index');
+        $this->middleware('can:actividads.create')->only('create', 'store');
+        $this->middleware('can:actividads.edit')->only('edit', 'update');
+        $this->middleware('can:actividads.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $actividad = Actividad::all();

@@ -15,10 +15,10 @@ class UnidadMedidaController extends Controller
     public function __construct(){
         // $this->middleware('auth');//?
 
-        $this->middleware('can:unidadMedida.index')->only('index');
-        $this->middleware('can:unidadMedida.create')->only('create', 'store');
-        $this->middleware('can:unidadMedida.edit')->only('edit', 'update');
-        $this->middleware('can:unidadMedida.destroy')->only('destroy');
+        $this->middleware('can:unidadMedidas.index')->only('index');
+        $this->middleware('can:unidadMedidas.create')->only('create', 'store');
+        $this->middleware('can:unidadMedidas.edit')->only('edit', 'update');
+        $this->middleware('can:unidadMedidas.destroy')->only('destroy');
     }
     public function index()
     {

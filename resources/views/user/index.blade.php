@@ -12,51 +12,134 @@
             <strong>{{ session('info') }}</strong>
         </div>
     @endif
-    
-    <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">CREAR</a>
+    @hasanyrole('administrador')
 
-    <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
-        <thead class="bg-dark text-white">
-            <tr>
-                <th scope="col">NOMBRE DE USUARIO</th>
-                <th scope="col">EMAIL</th>
-                <th scope="col">PERSONA</th>
-                <th scope="col">ACCIONES</th>
-            </tr>
-        </thead>
-        <TBODY>
-            @foreach ($users as $user)
+        <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">CREAR</a>
+
+        <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
+            <thead class="bg-dark text-white">
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
+                    <th scope="col">NOMBRE DE USUARIO</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">PERSONA</th>
+                    <th scope="col">ACCIONES</th>
+                </tr>
+            </thead>
+            <TBODY>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            @foreach ($personas as $persona)
+                                @if ($persona->id == $user->persona_id)
+                                    @php($personaId = $persona->nombres . ' ' . $persona->apellidos)
+                                @break
+                            @else
+                                @php($personaId = 'persona no asignada')
+                            @endif
+                @endforeach{{ $personaId }}
+                </td>
+                <td>
+
+
+                    <!---->
+                    <form action="{{ route('users.destroy', $user) }}" method="POST">
+                        {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
+                        <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Editar</a>
+                        @csrf
+                        <!--metodo para añadir token a un formulario-->
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        {{-- <a href="{{route('users.show', $user)}}" class="btn btn-primary">Mostrar</a> --}}
+                    </form>
+                </td>
+                </tr>
+                @endforeach
+            </TBODY>
+        </table>
+
+    @else
+
+
+        <a href="{{ route('users.create') }}" class="btn btn-primary mb-4">CREAR</a>
+        <h5>Usuario principal</h5>
+        <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">NOMBRE DE USUARIO</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">PERSONA</th>
+                    <th scope="col">ACCIONES</th>
+                </tr>
+            </thead>
+            <TBODY>
+                <tr>
+                    <td>{{ $userNutricionista->name }}</td>
+                    <td>{{ $userNutricionista->email }}</td>
                     <td>
                         @foreach ($personas as $persona)
-                            @if ($persona->id == $user->persona_id)
-                                @php($personaId = $persona->nombres)
-                            @break
-                        @else
-                            @php($personaId = 'persona no asignada')
-                        @endif
-            @endforeach{{ $personaId }}
-            </td>
-            <td>
+                            @if ($persona->id == $userNutricionista->persona_id)
+                                @php($personaId = $persona->nombres . ' ' . $persona->apellidos)
+                                @break
+                            @else
+                                @php($personaId = 'persona no asignada')
+                            @endif 
+                            @endforeach{{ $personaId }}
+                    </td>
+                    <td>
+                        <!---->
+                        {{-- <form action="{{ route('users.destroy', $userNutricionista) }}" method="POST"> --}}
+                            {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
+                            <a href="{{ route('users.edit', $userNutricionista) }}" class="btn btn-primary">Editar</a>
+                            {{-- @csrf --}}
+                            <!--metodo para añadir token a un formulario-->
+                            {{-- @method('delete')
+                            <button type="submit" class="btn btn-danger">Eliminar</button> --}}
+                            {{-- <a href="{{route('users.show', $user)}}" class="btn btn-primary">Mostrar</a> --}}
+                        {{-- </form> --}}
+                    </td>
+                </tr>
+            </TBODY>
+        </table>
 
 
-                <!---->
-                <form action="{{ route('users.destroy', $user) }}" method="POST">
-                    {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
-                    <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Editar</a>
-                    @csrf
-                    <!--metodo para añadir token a un formulario-->
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                    {{-- <a href="{{route('users.show', $user)}}" class="btn btn-primary">Mostrar</a> --}}
-                </form>
-            </td>
-            </tr>
-            @endforeach
-        </TBODY>
-    </table>
+        <h5>Usuarios paciente</h5>
+        <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">NOMBRE DE USUARIO</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">PERSONA</th>
+                    <th scope="col">ACCIONES</th>
+                </tr>
+            </thead>
+            <TBODY>
+                @foreach ($pacientes as $user)
+                    <tr>
+                        <td>{{$users->where('persona_id',$user->id)->first()->name}}</td>
+                        <td>{{ $users->where('persona_id',$user->id)->first()->email }}</td>
+                        <td>{{ $personas->where('id',$user->id)->first()->nombres }}</td>
+                <td>
+
+
+                    <!---->
+                    <form action="{{ route('users.destroy', $users->where('persona_id',$user->id)->first()) }}" method="POST">
+                        {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
+                        <a href="{{ route('users.edit', $users->where('persona_id',$user->id)->first()) }}" class="btn btn-primary">Editar</a>
+                        @csrf
+                        <!--metodo para añadir token a un formulario-->
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        {{-- <a href="{{route('users.show', $user)}}" class="btn btn-primary">Mostrar</a> --}}
+                    </form>
+                </td>
+                </tr>
+                @endforeach
+            </TBODY>
+        </table>
+
+    @endhasanyrole
 @stop
 
 @section('css')

@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persona;
 use App\Models\Suscripcion;
 use App\Models\SuscripcionUsuario;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class Suscripcion_usuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:suscripcion_usuarios.index')->only('index');
+        $this->middleware('can:suscripcion_usuarios.create')->only('create', 'store');
+        $this->middleware('can:suscripcion_usuarios.edit')->only('edit', 'update');
+        $this->middleware('can:suscripcion_usuarios.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $suscripcions = Suscripcion::all();
         $users = User::all();
         // return $users;
         $suscripcionUsuarios = SuscripcionUsuario::all();
-        return view('suscripcionUsuario.index',compact('users', 'suscripcionUsuarios', 'suscripcions'));
+        return view('suscripcionUsuario.index', compact('users', 'suscripcionUsuarios', 'suscripcions'));
     }
 
     /**
@@ -30,8 +40,18 @@ class Suscripcion_usuarioController extends Controller
      */
     public function create()
     {
+        $personas = DB::table('personas')->where('tipo', 'N')
+            ->whereExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('users')
+                    ->whereColumn('users.persona_id', 'personas.id');
+            })
+            ->get();
+        // return $personas;
         $suscripcions = Suscripcion::all();
-        return view('suscripcionUsuario.create', compact('suscripcions', 'suscripcions'));
+        $personas = Persona::Where('tipo', 'N')->get();
+        // $users = DB::table('users')->count(); //para contar una tabla
+        return view('suscripcionUsuario.create', compact('suscripcions', 'suscripcions', 'personas'));
     }
 
     /**
@@ -43,14 +63,44 @@ class Suscripcion_usuarioController extends Controller
     public function store(Request $request)
     {
         // return auth()->user()->id;
-        $suscripcionUsuario= new SuscripcionUsuario();
-        $suscripcionUsuario->fecha_inicio = $request->get('fecha_inicio');
-        $suscripcionUsuario->fecha_fin = $request->get('fecha_fin');
+
+        $mes = Suscripcion::Where('id', $request->get('suscripcion_id'))->first();
+
+        $suscripcionUsuario = new SuscripcionUsuario();
+
+        $fecha1 = date("d-m-Y");
+        if ($mes->meses == 1) {
+            $fecha = date("d-m-Y", strtotime($fecha1 . ' + 1 month'));
+        } else if ($mes->meses == 3) {
+            $fecha = date("d-m-Y", strtotime($fecha1 . ' + 3 month'));
+        } else if ($mes->meses == 6) {
+            $fecha = date("d-m-Y", strtotime($fecha1 . ' + 6 month'));
+        } else {
+            $fecha = date("d-m-Y", strtotime($fecha1 . ' + 12 month'));
+        };
+        $suscripcionUsuario->fecha_inicio = $fecha1;
+
+        $suscripcionUsuario->fecha_fin = $fecha;
         $suscripcionUsuario->activo = 'En espera';
         $suscripcionUsuario->pagado = false;
-        $suscripcionUsuario->user_id = auth()->user()->id;
         $suscripcionUsuario->suscripcion_id = $request->get('suscripcion_id');
+        if ($request->get('persona_id') != null) {
+            $user = User::Where('persona_id', $request->get('persona_id'))->first();
+            $suscripcionUsuario->user_id = $user->id;
+            if ($mes->monto_total == 0) {
+                $user->assignRole(2);
+                $suscripcionUsuario->activo = 'Activo';
+            }
+        } else {
+            $suscripcionUsuario->user_id = auth()->user()->id;
+            if ($mes->monto_total == 0) {
+                auth()->user()->id->assignRole(2);
+                $suscripcionUsuario->activo = 'Activo';
+            }
+        }
         $suscripcionUsuario->save();
+
+
         return redirect()->route('suscripcionUsuarios.index');
     }
 
@@ -74,7 +124,7 @@ class Suscripcion_usuarioController extends Controller
     public function edit(SuscripcionUsuario $suscripcionUsuario)
     {
         $suscripcions = Suscripcion::all();
-        return view('suscripcionUsuario.edit',compact('suscripcionUsuario', 'suscripcions'));
+        return view('suscripcionUsuario.edit', compact('suscripcionUsuario', 'suscripcions'));
     }
 
     /**

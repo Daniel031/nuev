@@ -9,11 +9,16 @@ use Illuminate\Http\Request;
 
 class MedidaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct(){
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:medidas.index')->only('index');
+        $this->middleware('can:medidas.create')->only('create', 'store');
+        $this->middleware('can:medidas.edit')->only('edit', 'update');
+        $this->middleware('can:medidas.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $unidadMedidas = UnidadMedida::all();

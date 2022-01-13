@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class SuscripcionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:suscripcions.index')->only('index');
+        $this->middleware('can:suscripcions.create')->only('create', 'store');
+        $this->middleware('can:suscripcions.edit')->only('edit', 'update');
+        $this->middleware('can:suscripcions.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $suscripcions = Suscripcion::all();

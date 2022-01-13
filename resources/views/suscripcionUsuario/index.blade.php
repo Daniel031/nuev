@@ -12,7 +12,7 @@
             <strong>{{ session('info') }}</strong>
         </div>
     @endif
-
+    
     <a href="{{ route('suscripcionUsuarios.create') }}" class="btn btn-primary mb-4">CREAR</a>
 
     <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
@@ -22,7 +22,7 @@
                 <th scope="col">SUSCRIPCION (PLAN)</th>
                 <th scope="col">FECHA INICIO</th>
                 <th scope="col">ESTADO</th>
-                <th scope="col">PAGADO</th>
+                <th scope="col">PAGO</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
@@ -35,10 +35,14 @@
                     <td>{{ $suscripcionUsuario->activo }}</td>
                     <td>
                         @php
-                            if($suscripcionUsuario->pagado){
-                                $aux='pagado';
-                            }else{
-                                $aux='impago';
+                            if ($suscripcionUsuario->pagado) {
+                                $aux = 'PAGO REALIZADO';
+                            } else {
+                                if ($suscripcions->where('id', $suscripcionUsuario->suscripcion_id)->first()->monto_total == 0) {
+                                    $aux = 'GRATUITO';
+                                } else {
+                                    $aux = 'IMPAGO';
+                                }
                             }
                         @endphp
                         {{ $aux }}</td>
@@ -46,7 +50,8 @@
                         <!---->
                         <form action="{{ route('suscripcionUsuarios.destroy', $suscripcionUsuario) }}" method="POST">
                             {{-- <a href="{{route('users.edit', $user)}}" class="btn btn-primary">Asignar rol</a> --}}
-                            <a href="{{ route('suscripcionUsuarios.edit', $suscripcionUsuario) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('suscripcionUsuarios.edit', $suscripcionUsuario) }}"
+                                class="btn btn-primary">Editar</a>
                             @csrf
                             <!--metodo para añadir token a un formulario-->
                             @method('delete')

@@ -9,11 +9,17 @@ use App\Models\Persona;
 
 class TratamientoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        // $this->middleware('auth');//?
+
+        $this->middleware('can:tratamientos.index')->only('index');
+        $this->middleware('can:tratamientos.create')->only('create', 'store');
+        $this->middleware('can:tratamientos.edit')->only('edit', 'update');
+        $this->middleware('can:tratamientos.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $tratamientos= Tratamiento::all();

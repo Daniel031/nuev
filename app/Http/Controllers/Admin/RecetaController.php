@@ -12,11 +12,15 @@ use Illuminate\Http\Request;
 
 class RecetaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct(){
+        // $this->middleware('auth');//?
+        // $this->middleware('can:alimentos.index')->only('index');
+        $this->middleware('can:recetas.create')->only('create', 'store');
+        $this->middleware('can:recetas.edit')->only('edit', 'update');
+        $this->middleware('can:recetas.destroy')->only('destroy');
+    }
+
     public function index()
     {
 
