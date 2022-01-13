@@ -18,25 +18,25 @@ class ConsultaSeeder extends Seeder
 
         $consultorios = ([
             [
-                'confirmada' => 'true',
+                'confirmada' => true,
                 'motivoConsulta' => 'Aumento de peso',
                 'expectativa'=>'Disminucion de peso',
                 'paciente_id' => 2,
             ],
             [
-                'confirmada' => 'false',
+                'confirmada' => false,
                 'motivoConsulta' => 'dolor punzante en el estomago',
                 'expectativa'=>'plan de alimentacion para regular la acidez',
                 'paciente_id' => 2,
             ],
             [
-                'confirmada' => 'true',
+                'confirmada' => true,
                 'motivoConsulta' => 'Registro de Activides proximas',
                 'expectativa'=>'rutina de actividades para bajar de peso',
                 'paciente_id' => 3,
             ],
             [
-                'confirmada' => 'true',
+                'confirmada' => true,
                 'motivoConsulta' => 'Dolor articular por falta de calcio',
                 'expectativa'=>'plan de alimentacion para aumentar la vitalidad',
                 'paciente_id' => 3,
