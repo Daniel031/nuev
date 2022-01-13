@@ -96,13 +96,14 @@ $user=User::where('id', $user2)->first();
         if($user->hasAnyRole('nuevo')){//tiene rol nutricionista
             $user->persona_id=$persona->id;
             $user->save();
+            
             $suscripcionUsuario = new SuscripcionUsuario();
             $suscripcionUsuario->suscripcion_id = '1';
             $fecha1 = date("d-m-Y");
             $suscripcionUsuario->fecha_inicio = $fecha1;
             $fecha = date("d-m-Y", strtotime($fecha1 . ' + 1 month'));
             $suscripcionUsuario->fecha_fin = $fecha;
-            $suscripcionUsuario->activo = 'Activo';
+            $suscripcionUsuario->activo = 'true';
             $suscripcionUsuario->pagado = false;
             $suscripcionUsuario->user_id = $user->id;
             $suscripcionUsuario->save();

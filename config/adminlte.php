@@ -274,12 +274,6 @@ return [
             'can'  => 'nutricionistas.index',
         ],
         [
-            'text' => 'Tratamiento',
-            'url'  => 'tratamientos',
-            'icon' => 'fas fa-fw fa-user',
-            'can'  => 'tratamientos.index',
-        ],
-        [
             'text' => 'Suscripcion',
             'url'  => 'suscripcions',
             'icon' => 'fas fa-fw fa-user',
